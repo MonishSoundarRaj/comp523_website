@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Specification | F26 COMP 523</title>
+<meta name="description" content="Requirements, user personas, user stories, workflows, and error-handling behavior for Library Navigator.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="masthead">
+    <a class="brand" href="index.html">F26 &middot; COMP 523</a>
+    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" data-page="index.html">The Project</a>
+      <a href="team.html" data-page="team.html">Meet the Team</a>
+      <a href="meetings.html" data-page="meetings.html">Meetings and Decisions</a>
+      <a href="specification.html" data-page="specification.html">Specification</a>
+      <div class="menu">
+        <button class="menubtn" type="button" aria-expanded="false" aria-haspopup="true">Deliverables</button>
+        <ul class="menulist">
+          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Project Timeline</a></li>
+          <li><a href="resources.html" data-page="resources.html">Related Links</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="pagehead">
+    <h1 class="pagetitle">Specification</h1>
+    <p class="deck">Requirements, personas, user stories, workflows, and error-handling behavior. A living document.</p>
+  </div>
+
+  <section class="section">
+    <div class="col">
+      <div class="jump">
+        <a href="#requirements">Requirements</a>
+        <a href="#scope">Out of scope</a>
+        <a href="#personas">Personas</a>
+        <a href="#stories">User stories</a>
+        <a href="#workflows">Workflows</a>
+        <a href="#errors">Error handling</a>
+        <a href="#approach">Technical approach</a>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="requirements">
+    <div class="col">
+      <h2>Functional requirements</h2>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">FR-1</div>
+        <div class="record-title">Resource discovery by location</div>
+        <div class="record-body">A user enters a ZIP code or town and receives the library system and outlets serving that area, with their available digital and physical resources, ranked by proximity.</div>
+        <div class="record-meta">Must have</div>
+      </div>
+      <div class="record">
+        <div class="record-label">FR-2</div>
+        <div class="record-title">Natural-language question answering</div>
+        <div class="record-body">Questions are answered from the curated dataset of roughly 467 records covering 100 counties, 90 library systems, and 413 outlets, with about 40 attributes each including resource name, URL, access model, format, NC LIVE membership, and usability notes.</div>
+        <div class="record-meta">Must have</div>
+      </div>
+      <div class="record">
+        <div class="record-label">FR-3</div>
+        <div class="record-title">Step-by-step guided navigation</div>
+        <div class="record-body">Modeled on the NC DMV AI agent. The assistant walks the user through card signup, login, app installation, and database access one step at a time, confirming before advancing.</div>
+        <div class="record-meta">Must have</div>
+      </div>
+      <div class="record">
+        <div class="record-label">FR-4</div>
+        <div class="record-title">Source citation</div>
+        <div class="record-body">Every substantive answer names where it came from and links to it.</div>
+        <div class="record-meta">Must have</div>
+      </div>
+      <div class="record">
+        <div class="record-label">FR-5</div>
+        <div class="record-title">Confidence-based guardrails</div>
+        <div class="record-body">High-confidence answers are served directly. Medium and low confidence answers are visibly flagged, cited, and offered with a path to a human librarian.</div>
+        <div class="record-meta">Must have</div>
+      </div>
+      <div class="record">
+        <div class="record-label">FR-6</div>
+        <div class="record-title">Librarian admin panel</div>
+        <div class="record-body">Authenticated librarians can add, edit, remove, and override dataset entries, and can flag broken links. Every change is recorded in an audit log.</div>
+        <div class="record-meta">Must have</div>
+      </div>
+      <div class="record">
+        <div class="record-label">FR-7</div>
+        <div class="record-title">Responsive interface</div>
+        <div class="record-body">The interface works on desktop, tablet, and mobile.</div>
+        <div class="record-meta">Must have</div>
+      </div>
+      <div class="record">
+        <div class="record-label">FR-8</div>
+        <div class="record-title">Local activity and event information</div>
+        <div class="record-body">Community programs, health events, and links to local resources.</div>
+        <div class="record-meta">Should have</div>
+      </div>
+      <div class="record">
+        <div class="record-label">FR-9</div>
+        <div class="record-title">Gap reporting</div>
+        <div class="record-body">Questions the assistant cannot answer are logged to a review queue that librarians can see.</div>
+        <div class="record-meta">Should have</div>
+      </div>
+      <div class="record">
+        <div class="record-label">FR-10</div>
+        <div class="record-title">Conversation memory within a session</div>
+        <div class="record-body">A user can ask a follow-up question without repeating their ZIP code.</div>
+        <div class="record-meta">Should have</div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="col">
+      <h2>Non-functional requirements</h2>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">NFR-1</div>
+        <div class="record-title">Plain language</div>
+        <div class="record-body">Output targets roughly a sixth to eighth grade reading level. No library jargon without explanation. Words like database, catalog, and consortium mean nothing to most patrons.</div>
+      </div>
+      <div class="record">
+        <div class="record-label">NFR-2</div>
+        <div class="record-title">Accessibility</div>
+        <div class="record-body">WCAG 2.1 AA. Keyboard navigable, screen-reader usable, adequate contrast, resizable text. One of our primary personas is 72 years old.</div>
+      </div>
+      <div class="record">
+        <div class="record-label">NFR-3</div>
+        <div class="record-title">Performance</div>
+        <div class="record-body">First response in under about five seconds, usable on slow rural connections, with no heavy client-side payloads.</div>
+      </div>
+      <div class="record">
+        <div class="record-label">NFR-4</div>
+        <div class="record-title">Privacy</div>
+        <div class="record-body">No account required for patrons. ZIP code only, never a street address. No personally identifying information stored. Health-topic queries are especially sensitive and are never retained against an identity.</div>
+      </div>
+      <div class="record">
+        <div class="record-label">NFR-5</div>
+        <div class="record-title">Bounded cost</div>
+        <div class="record-body">API spend is estimated and capped. A cost estimate with justification goes to the client before any paid service is switched on.</div>
+      </div>
+      <div class="record">
+        <div class="record-label">NFR-6</div>
+        <div class="record-title">Maintainability</div>
+        <div class="record-body">The dataset is swappable without a code change, so the client can replace it as it is finalized and extended.</div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="scope">
+    <div class="col">
+      <h2>Out of scope this semester</h2>
+      <ul>
+        <li>Real time crawling of live library websites. Discussed and deliberately
+        deferred. See decision D-1 on the <a href="timeline.html">timeline</a>.</li>
+        <li>The fully autonomous agent that keeps the database current on its own.
+        That is the long-term vision, not this semester's deliverable.</li>
+        <li>Native iOS and Android applications. The web interface is responsive
+        instead.</li>
+        <li>Languages other than English. A stretch goal at best.</li>
+        <li>Patron accounts, saved history, or authentication for anyone who is not
+        a librarian.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="section" id="personas">
+    <div class="col">
+      <h2>User personas</h2>
+      <p class="muted">Four personas guide design and evaluation. Every feature is
+      checked against at least one of them.</p>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">Persona one</div>
+        <div class="record-title"><span class="person-name">Ruth, 72. Managing hypertension and type 2 diabetes.</span></div>
+        <div class="record-body">Lives outside a small town in eastern North Carolina. Her doctor is forty minutes away and she goes twice a year. She has a library card from a decade ago and a tablet her daughter set up.<ul><li><strong>Needs:</strong> trustworthy, readable health information, help getting past a login screen, large text, and no jargon.</li><li><strong>Frustrations:</strong> does not know the library offers anything online at all, abandons any site that asks her to authenticate, and is afraid of clicking the wrong thing.</li><li><strong>Success:</strong> she reaches a reputable health database and reads an article about her condition without calling her daughter.</li></ul></div>
+      </div>
+      <div class="record">
+        <div class="record-label">Persona two</div>
+        <div class="record-title"><span class="person-name">Danielle, 38. Homeschooling parent of three.</span></div>
+        <div class="record-body">Rural county in the northwest. Comfortable with technology and chronically short on time.<ul><li><strong>Needs:</strong> pediatric health information she can trust, reading and curriculum material by grade level, e-books and audiobooks for the kids, and the county library's programs.</li><li><strong>Frustrations:</strong> cannot tell what is free through the library versus what she is about to pay for twice, and resources are scattered across a dozen sites.</li><li><strong>Success:</strong> one list of what her library already pays for, by subject and age, with the access steps attached.</li></ul></div>
+      </div>
+      <div class="record">
+        <div class="record-label">Persona three</div>
+        <div class="record-title"><span class="person-name">Marcus, 16. Rural teenager seeking mental health support.</span></div>
+        <div class="record-body">Southeastern North Carolina. Phone only. There is one counselor for his entire school.<ul><li><strong>Needs:</strong> confidential, after-hours, mobile-first access to mental health information and local services.</li><li><strong>Frustrations:</strong> few local options, will not ask a librarian in person, and does not want a record of what he searched.</li><li><strong>Success:</strong> he finds real local and statewide support, and if he is in crisis he is handed the crisis line immediately rather than a chatbot's opinion.</li></ul></div>
+      </div>
+      <div class="record">
+        <div class="record-label">Persona four</div>
+        <div class="record-title"><span class="person-name">Sandra, 45. Branch librarian and system administrator.</span></div>
+        <div class="record-body">Manages a branch in the foothills. Eleven years in the job and she still finds subscriptions she did not know about.<ul><li><strong>Needs:</strong> to correct wrong entries for her branch, fix broken links, add local events, and override an answer the assistant keeps getting wrong.</li><li><strong>Frustrations:</strong> the catalog of resources is larger than any one person can hold, and nobody owns keeping the list current.</li><li><strong>Success:</strong> she fixes a bad entry in under two minutes and sees the assistant's answer change.</li></ul></div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="stories">
+    <div class="col">
+      <h2>User stories</h2>
+      <h3>Ruth, older adult with a chronic condition</h3>
+      <div class="story">
+        <div class="story-text">As Ruth, I want to type my ZIP code and be told which library serves me, so that I know where to start.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> a valid North Carolina ZIP returns the serving system and nearest outlets with address and hours, nearest first.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Ruth, I want to ask about managing my diabetes in my own words and be shown resources my library already pays for.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> results are filtered to what her system actually carries, and each result names its source and links to it.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Ruth, I want to be walked through logging in one step at a time, so that I do not get lost.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> one instruction per step, the assistant waits for confirmation before continuing, and the user can go back.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Ruth, I want to be told plainly when the assistant is not sure, so that I do not act on something wrong.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> below the confidence threshold the answer is visibly marked as unverified and the librarian contact is offered.</div>
+      </div>
+      <h3>Danielle, homeschooling parent</h3>
+      <div class="story">
+        <div class="story-text">As Danielle, I want to see everything my library offers for children by subject and age, so that I stop paying for things I already have.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> results can be filtered by audience and format, and the access model is stated for each.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Danielle, I want to know how to get my kids onto Libby and Hoopla, so that I can set it up once.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> a guided walkthrough covers card number, app install, and library selection.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Danielle, I want to see upcoming programs at my county library, so that I can plan around them.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> local events are listed with date, location, and a source link.</div>
+      </div>
+      <h3>Marcus, rural teenager</h3>
+      <div class="story">
+        <div class="story-text">As Marcus, I want to use this on my phone without making an account, so that nothing is tied to my name.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> full functionality on a small screen with no login, and no personally identifying information collected.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Marcus, I want to find mental health resources near me and statewide, so that I have somewhere to go.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> results include library-provided resources and vetted local and statewide services.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Marcus, if I say something that sounds like a crisis, I want real help immediately rather than a chatbot answer.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> crisis language triggers an immediate, unmissable handoff to the 988 Suicide and Crisis Lifeline and local services, and the assistant does not attempt triage.</div>
+      </div>
+      <h3>Sandra, librarian administrator</h3>
+      <div class="story">
+        <div class="story-text">As Sandra, I want to sign in to an admin panel, so that only staff can change the data.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> authenticated access only, and unauthenticated requests to admin routes are rejected.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Sandra, I want to add, edit, and remove resource entries for my system, so that the data reflects reality.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> full create, edit, and remove on entries scoped to her system, reflected in answers immediately.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Sandra, I want to override an answer the assistant keeps getting wrong, so that patrons stop being misled.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> a librarian-authored override takes precedence over generated content and is labeled as staff verified.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Sandra, I want to see questions the assistant could not answer, so that I know what to add.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> a review queue of unanswered and low-confidence questions, with frequency counts.</div>
+      </div>
+      <div class="story">
+        <div class="story-text">As Sandra, I want broken links flagged, so that I am not the one who has to find them.</div>
+        <div class="story-accept"><strong>Accepted when:</strong> links recorded as broken, or reported by users, appear in the queue and are suppressed from answers.</div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="workflows">
+    <div class="col">
+      <h2>Core workflows</h2>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">W1</div>
+        <div class="record-title">Resource discovery</div>
+        <div class="record-body"><ol><li>The user opens the assistant and is asked for a ZIP code, or the name of their town.</li><li>The system resolves that to a county, a library system, and the outlets serving it.</li><li>The user asks a question in plain language.</li><li>The system retrieves matching records, scoped to that system's holdings.</li><li>Results are ranked by relevance and proximity and returned with access model, format, and source link.</li><li>The user selects one and is offered the guided walkthrough.</li></ol></div>
+      </div>
+      <div class="record">
+        <div class="record-label">W2</div>
+        <div class="record-title">Guided access walkthrough</div>
+        <div class="record-body"><ol><li>The system states what the user needs before starting, such as a library card number.</li><li>The system gives one step and waits.</li><li>The user confirms, asks for clarification, or says it did not work.</li><li>If it did not work, the system offers the known alternative path for that resource.</li><li>Steps repeat until access is confirmed or the user is handed to a librarian.</li><li>The system closes with a short summary of what was done, so it can be repeated later.</li></ol></div>
+      </div>
+      <div class="record">
+        <div class="record-label">W3</div>
+        <div class="record-title">Local activities and events</div>
+        <div class="record-body"><ol><li>The user asks what is happening nearby, or accepts a prompt offering it.</li><li>The system returns programs and health events for the resolved system, with date, place, and source.</li><li>Entries past their date are not shown.</li></ol></div>
+      </div>
+      <div class="record">
+        <div class="record-label">W4</div>
+        <div class="record-title">Librarian administration</div>
+        <div class="record-body"><ol><li>The librarian authenticates into the admin panel.</li><li>The panel lists entries scoped to their system, plus the review queue of unanswered, low-confidence, and broken-link items.</li><li>The librarian creates, edits, overrides, or retires an entry.</li><li>The change is validated, written, and recorded in the audit log with author and timestamp.</li><li>Subsequent answers reflect the change.</li></ol></div>
+      </div>
+      <div class="record">
+        <div class="record-label">W5</div>
+        <div class="record-title">Low-confidence escalation</div>
+        <div class="record-body"><ol><li>The system scores its retrieval and answer confidence.</li><li>High confidence: the answer is served directly with its citation.</li><li>Medium confidence: the answer is served, visibly marked as unverified, with the source link foregrounded and a suggestion to confirm with a librarian.</li><li>Low confidence: no answer is asserted. The system says it does not know, offers the closest verified resource and the librarian contact, and logs the question to the review queue.</li></ol></div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="errors">
+    <div class="col">
+      <h2>Error handling</h2>
+      <p class="muted">What the assistant does when something goes wrong, is missing,
+      or falls outside what it should answer.</p>
+      <div class="records">
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Invalid or malformed ZIP code</div>
+          <div class="pair-body">Reject it without penalty, explain the expected format, and offer to search by town or county name instead. Never guess a location.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">ZIP code outside North Carolina</div>
+          <div class="pair-body">Say plainly that coverage is North Carolina only, and point to the national library locator and NC LIVE as alternatives.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">ZIP resolves but no outlet nearby</div>
+          <div class="pair-body">Return the serving system's digital resources anyway, since those do not require a trip, and name the nearest physical outlet with its distance.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">No resource matches the topic</div>
+          <div class="pair-body">Say so directly rather than substituting something loosely related. Offer the nearest adjacent category, offer the librarian contact, and log the gap to the review queue.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Low retrieval confidence</div>
+          <div class="pair-body">Do not assert an answer at all. Say what is not known, offer the closest verified resource and the librarian contact, and log the question.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Medium confidence</div>
+          <div class="pair-body">Serve the answer with a visible marker that it is unverified and a prominent source link, and suggest confirming with a librarian.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Link known to be broken</div>
+          <div class="pair-body">Suppress the link, show the resource with a note that access is currently unavailable, offer the library's contact, and surface it in the librarian queue.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Model or API failure or timeout</div>
+          <div class="pair-body">Fail visibly, not silently. Show a plain message, retry once, and fall back to a static directory of the resolved system's resources so the user is not left with nothing.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Rate limit or budget ceiling reached</div>
+          <div class="pair-body">Degrade to keyword search over the dataset and notify administrators. The site stays usable.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Request for medical, legal, or financial advice</div>
+          <div class="pair-body">Decline to advise. Redirect to the relevant vetted resources and, where appropriate, to a professional. The assistant finds information. It does not diagnose or counsel.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Crisis or self-harm language</div>
+          <div class="pair-body">Interrupt the normal flow immediately and present the 988 Suicide and Crisis Lifeline and local crisis services prominently. Do not triage, assess, or counsel, and do not make the user keep typing to reach help.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Prompt injection or off-topic manipulation</div>
+          <div class="pair-body">Stay in scope. Content retrieved from the dataset or the web is treated as data, never as instructions.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Unauthenticated access to an admin route</div>
+          <div class="pair-body">Reject with a generic failure, reveal nothing about what exists, and record the attempt.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Invalid librarian edit</div>
+          <div class="pair-body">Reject the write, keep the previous value intact, and explain exactly which field failed and why.</div>
+        </div>
+      </div>
+      <div class="record">
+        <div class="pair">
+          <div class="pair-term">Dataset unavailable at startup</div>
+          <div class="pair-body">Refuse to serve generated answers at all rather than answer without grounding. Show a maintenance notice.</div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="approach">
+    <div class="col">
+      <h2>Technical approach</h2>
+      <ul>
+        <li><strong>Backend data.</strong> The curated dataset assembled by the
+        client's research students: roughly 467 rows, all 100 counties, 90 library
+        systems, 413 outlets, and about 40 columns per row. Still being finalized
+        and delivered via OneDrive.</li>
+        <li><strong>Retrieval.</strong> Retrieval over that dataset, filtered by the
+        resolved library system, feeding a generation step that is required to cite
+        what it used.</li>
+        <li><strong>Guardrails.</strong> Confidence scoring on both retrieval and
+        generation, thresholded into the behavior described in workflow W5.</li>
+        <li><strong>Administration.</strong> Authenticated create, edit, and remove
+        over the dataset, with an audit log and a review queue.</li>
+        <li><strong>Deferred.</strong> Live fetching and real time retrieval. The
+        client is open to funding API costs, and we owe a cost estimate with
+        justification before anything paid is enabled. The client also has a
+        high-end laptop with a local LLM already configured that we may use.</li>
+        <li><strong>First working version</strong> is estimated at two to five weeks
+        from the kickoff meeting.</li>
+      </ul>
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="deliverables.html">Deliverables Index</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a></div>
+    <p>Library Navigator. COMP 523 Software Engineering Laboratory, Department of
+    Computer Science, UNC-Chapel Hill, Fall 2026.</p>
+    <p class="updated small"></p>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

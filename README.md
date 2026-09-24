@@ -7,58 +7,65 @@ UNC-Chapel Hill · COMP 523 Software Engineering Laboratory · Fall 2026
 
 ## About the project
 
-Public libraries across North Carolina pay for far more than most people ever use —
-health databases, e-book and audiobook services, tutoring, job tools, and local
-programs. The problem is not access; it is that almost nobody knows these resources
-exist. Librarians themselves often cannot name the full catalog their system carries.
+Public libraries across North Carolina subscribe to far more than most people ever
+use: health databases, e-book and audiobook services, tutoring, job tools, and local
+programs. The problem is not access. The problem is that almost nobody knows any of
+it exists. Librarians themselves often cannot name the full catalog their system
+carries.
 
 Library Navigator closes that gap. A patron enters a ZIP code and a plain-English
 question, and the assistant answers with the specific resources their own library
-system offers, ranked by proximity, then walks them through getting in step by step.
-Librarians get an admin panel to correct, extend, and govern the data behind it.
+system offers, ranked by proximity, then walks them through getting in one step at a
+time. Librarians get an admin panel to correct, extend, and govern the data behind
+it.
 
 The semester deliverable is a functioning proof of concept with working code.
 
-## This repository
+## Site structure
 
-| File | Purpose |
+Static HTML. No build step, no framework, no dependencies. One page per section,
+with all navigation in the site header.
+
+| Page | Contents |
 | --- | --- |
-| `index.html` | The complete project website — a single self-contained file with all CSS and JavaScript inline. No build step, no dependencies. |
+| `index.html` | Project introduction and concept |
+| `team.html` | Roster, roles, contact, team rules, client and faculty |
+| `meetings.html` | Schedule of regular meetings, journal of meetings and decisions |
+| `specification.html` | Requirements, personas, user stories, workflows, error handling |
+| `deliverables.html` | Every deliverable with due date and status |
+| `timeline.html` | Dated milestones, decisions, deployments, pivots |
+| `resources.html` | Related external links |
 
-## Site contents
+| Asset | Purpose |
+| --- | --- |
+| `assets/data.js` | **All site content that changes week to week.** Edit this. |
+| `assets/site.js` | Rendering and navigation. No edits needed for a content update. |
+| `assets/site.css` | Shared stylesheet. |
 
-All ten sections required by the course, reachable in one click from the header
-navigation:
+## Posting a weekly update
 
-Overview · Team · Team Rules · Schedule · Specification · Deliverables ·
-Timeline · Journal · Client & Faculty · Related Links
-
-The specification section carries the functional and non-functional requirements,
-the four user personas, user stories with acceptance criteria, the core workflows,
-and the error-handling behavior.
-
-## Updating the site
-
-Open `index.html` and edit the block marked `EDIT HERE` at the top of the `<script>`
-element. The team roster, schedule, deliverables, timeline, journal, faculty table,
-and related links are all rendered from plain JavaScript arrays there — you should
-never need to touch the markup to post a weekly update.
+Open `assets/data.js`. You should not need to touch a single `.html` file.
 
 - `TEAM` — names, roles, responsibilities, emails. The one-click "email the whole
-  team" link is built automatically from this array.
+  team" link on the Team page is built automatically from this array.
+- `CLIENT`, `FACULTY` — client and course contacts.
 - `SCHEDULE` — regular meetings.
-- `DELIVERABLES` — status is one of `done`, `active`, or `todo`.
+- `DELIVERABLES` — `status` is one of `done`, `wip`, or `todo`.
 - `TIMELINE` — milestones, decisions, deployments, pivots.
 - `JOURNAL` — meeting entries, each with what was discussed, decided, and assigned.
-- `FACULTY`, `CLIENT_EMAIL`, `LINKS`.
+- `LINKS` — related external resources.
 - `LAST_UPDATED` — bump this whenever you post a change.
 
 Timeline and journal entries sort themselves into reverse-chronological order, so
-add new entries anywhere in the array.
+you can add a new entry anywhere in the array.
+
+Two things live in the HTML rather than in the data file, because they rarely
+change: the header navigation and the brand text in the top left. Both are repeated
+in all seven pages, so changing either means editing all seven.
 
 ## Viewing locally
 
-No server or build is required. Open the file directly:
+No server required. Open the file directly:
 
 ```
 open index.html

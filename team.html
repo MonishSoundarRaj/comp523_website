@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meet the Team | F26 COMP 523</title>
+<meta name="description" content="The team building Library Navigator, our roles and contact information, our team rules, and our client.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="masthead">
+    <a class="brand" href="index.html">F26 &middot; COMP 523</a>
+    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" data-page="index.html">The Project</a>
+      <a href="team.html" data-page="team.html">Meet the Team</a>
+      <a href="meetings.html" data-page="meetings.html">Meetings and Decisions</a>
+      <a href="specification.html" data-page="specification.html">Specification</a>
+      <div class="menu">
+        <button class="menubtn" type="button" aria-expanded="false" aria-haspopup="true">Deliverables</button>
+        <ul class="menulist">
+          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Project Timeline</a></li>
+          <li><a href="resources.html" data-page="resources.html">Related Links</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="pagehead">
+    <h1 class="pagetitle">Meet the Team</h1>
+    <p class="deck">Who is building Library Navigator, how we work together, and who we are building it for.</p>
+  </div>
+
+  <section class="section">
+    <div class="col">
+      <h2>The team</h2>
+      <p class="muted">Every member writes code. The roles below describe where each
+      person carries primary responsibility, meaning who chases a decision when it
+      stalls. They are not the limit of what anyone works on.</p>
+      <div id="team-list"></div>
+      <p style="margin-top:34px" id="team-mailto"></p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="col">
+      <h2>Team rules</h2>
+      <p class="muted">Agreed by the whole team. Amendments require agreement at a
+      team meeting and are logged in the
+      <a href="meetings.html">journal</a>.</p>
+      <h3>Communication</h3>
+      <ul>
+        <li>The team group chat is the primary channel for day-to-day coordination.</li>
+        <li>Messages that ask something of you get a reply within 24 hours on
+        weekdays, even if the reply is only to say you will answer that evening.</li>
+        <li>Anything urgent, such as a broken build before a demo, is a phone call
+        rather than a chat message.</li>
+        <li>All email to the client or the professor goes out from the Client
+        Manager with the rest of the team copied. Nobody emails the client alone.</li>
+        <li>Decisions made in chat are not decisions until they are written into the
+        journal on this site.</li>
+      </ul>
+      <h3>Meetings</h3>
+      <ul>
+        <li>Attendance at the weekly team meeting, the coach meeting, and client
+        meetings is expected.</li>
+        <li>If you cannot make one, say so at least 24 hours ahead and send your
+        status in writing beforehand.</li>
+        <li>An agenda goes into the group chat before each meeting. Notes are posted
+        to the journal within 24 hours after.</li>
+        <li>Every meeting ends by naming action items, an owner for each, and a due
+        date.</li>
+      </ul>
+      <h3>Working agreements</h3>
+      <ul>
+        <li>Work is divided at the weekly meeting. Taking a task means committing to
+        a date.</li>
+        <li>Raise blockers within 24 hours of hitting them, not at the deadline. A
+        blocker surfaced early is a team problem. Surfaced late it is a crisis.</li>
+        <li>All work happens on feature branches. No direct pushes to the main
+        branch.</li>
+        <li>Every pull request needs review and approval from at least one teammate
+        before it is merged.</li>
+        <li>Work is done when it works, a teammate has reviewed it, it is
+        documented, and it is merged.</li>
+        <li>Client data and anything the client marks confidential stays off this
+        public site.</li>
+        <li>No credentials, API keys, or dataset exports in the repository.</li>
+      </ul>
+      <h3>Decisions and conflict</h3>
+      <ul>
+        <li>Decisions are made by consensus where possible. If the team is genuinely
+        split, the Project Manager decides and the reasoning is recorded.</li>
+        <li>A decision that has been made and logged is not reopened without new
+        information.</li>
+        <li>Disagreements are raised directly with the person involved, early and in
+        plain terms.</li>
+        <li>Anything that cannot be resolved inside the team goes to the coach, and
+        then to the professor.</li>
+        <li>A missed commitment without notice is discussed at the next team
+        meeting. A repeated pattern is escalated to the coach.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="section">
+    <div class="col">
+      <h2>Our client</h2>
+      <p><strong id="client-name"></strong><br>
+      <span class="muted" id="client-org"></span><br>
+      <span class="small" id="client-email"></span></p>
+      <p>Our client's research group is building a picture of what North Carolina's
+      public libraries actually offer, particularly health information resources,
+      and how well rural patrons can reach them. Her students spent June and July
+      assembling the dataset behind this project: every county, every library
+      system, every outlet, and the digital subscriptions attached to each. The
+      chatbot is the front end that makes that work reachable by the people it was
+      collected for.</p>
+      <p>She meets with the team weekly, on Wednesdays and Thursdays by preference,
+      and has asked for a short written update even in weeks with no meeting.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="col">
+      <h2>Course faculty</h2>
+      <div id="faculty-list"></div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="deliverables.html">Deliverables Index</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a></div>
+    <p>Library Navigator. COMP 523 Software Engineering Laboratory, Department of
+    Computer Science, UNC-Chapel Hill, Fall 2026.</p>
+    <p class="updated small"></p>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
