@@ -80,30 +80,52 @@
     var btn = menu.querySelector(".menubtn");
     if (!btn) { return; }
 
+    var timer = null;
+
+    function isDesktop() { return window.matchMedia("(min-width: 861px)").matches; }
+
+    function open() {
+      window.clearTimeout(timer);
+      menu.classList.add("open");
+      btn.setAttribute("aria-expanded", "true");
+    }
+
     function close() {
+      window.clearTimeout(timer);
       menu.classList.remove("open");
       btn.setAttribute("aria-expanded", "false");
     }
 
+    /* Close on a delay, so that a cursor that slips outside the menu for a
+       moment on its way to an item does not dismiss it. */
+    function closeSoon() {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(close, 260);
+    }
+
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
-      var open = menu.classList.toggle("open");
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      if (menu.classList.contains("open")) { close(); } else { open(); }
     });
+
     document.addEventListener("click", function (e) {
       if (!menu.contains(e.target)) { close(); }
     });
+
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") { close(); }
+      if (e.key === "Escape") { close(); btn.focus(); }
     });
-    menu.addEventListener("mouseenter", function () {
-      if (window.matchMedia("(min-width: 861px)").matches) {
-        menu.classList.add("open");
-        btn.setAttribute("aria-expanded", "true");
-      }
-    });
-    menu.addEventListener("mouseleave", function () {
-      if (window.matchMedia("(min-width: 861px)").matches) { close(); }
+
+    menu.addEventListener("mouseenter", function () { if (isDesktop()) { open(); } });
+    menu.addEventListener("mouseleave", function () { if (isDesktop()) { closeSoon(); } });
+
+    /* Keyboard users get the same panel, and it stays open while focus is
+       anywhere inside it. */
+    menu.addEventListener("focusin", open);
+    menu.addEventListener("focusout", function () {
+      window.setTimeout(function () {
+        if (!menu.contains(document.activeElement)) { close(); }
+      }, 0);
     });
   }
 

@@ -17,12 +17,6 @@ var LAST_UPDATED = "2026-09-24";
 
 var TEAM = [
   {
-    name:  "Monish Soundarraj",
-    role:  "Web & Documentation Lead",
-    email: "",
-    duties: "Owns this site and the specification document, and keeps the journal, timeline, and deliverables current. Also works on the backend and retrieval layer."
-  },
-  {
     name:  "Aditya",
     role:  "Project Manager",
     email: "",
@@ -39,6 +33,12 @@ var TEAM = [
     role:  "Client Manager",
     email: "",
     duties: "Single point of contact with the client. Sends all client correspondence, gathers requirements, and delivers the weekly written update."
+  },
+  {
+    name:  "Monish Soundarraj",
+    role:  "Web & Documentation Lead",
+    email: "",
+    duties: "Owns this site and the specification document, and keeps the journal, timeline, and deliverables current. Also works on the backend and retrieval layer."
   }
 ];
 
