@@ -17,7 +17,7 @@ var LAST_UPDATED = "2026-09-25";
 
 var TEAM = [
   {
-    name:  "Aditya",
+    name:  "Aditya Veerathu",
     role:  "Project Manager",
     email: "adivee@unc.edu",
     duties: "Runs team meetings and the schedule, tracks action items and blockers, and coordinates the coach meeting. Breaks ties when the team is split on a decision."
@@ -29,7 +29,7 @@ var TEAM = [
     duties: "Owns the architecture, the retrieval and guardrail design, code review standards, and the repository."
   },
   {
-    name:  "Will C.",
+    name:  "Will Minor",
     role:  "Web & Documentation Lead",
     email: "wminor@unc.edu",
     duties: "Keeps this site, the journal, the timeline, and the deliverables current, and maintains the specification document alongside the rest of the team."
