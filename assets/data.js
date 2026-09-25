@@ -9,7 +9,7 @@
    order, so add new entries anywhere in the array.
    ========================================================================== */
 
-var LAST_UPDATED = "2026-09-24";
+var LAST_UPDATED = "2026-09-25";
 
 /* --------------------------------------------------------------- the team
    Fill in full names and @unc.edu addresses. The one-click "email the whole
@@ -19,7 +19,7 @@ var TEAM = [
   {
     name:  "Aditya",
     role:  "Project Manager",
-    email: "",
+    email: "adivee@unc.edu",
     duties: "Runs team meetings and the schedule, tracks action items and blockers, and coordinates the coach meeting. Breaks ties when the team is split on a decision."
   },
   {
@@ -30,15 +30,15 @@ var TEAM = [
   },
   {
     name:  "Will C.",
-    role:  "Client Manager",
-    email: "",
-    duties: "Single point of contact with the client. Sends all client correspondence, gathers requirements, and delivers the weekly written update."
+    role:  "Web & Documentation Lead",
+    email: "wminor@unc.edu",
+    duties: "Keeps this site, the journal, the timeline, and the deliverables current, and maintains the specification document alongside the rest of the team."
   },
   {
     name:  "Monish Soundarraj",
-    role:  "Web & Documentation Lead",
-    email: "",
-    duties: "Owns this site and the specification document, and keeps the journal, timeline, and deliverables current. Also works on the backend and retrieval layer."
+    role:  "Client Manager",
+    email: "msoundar@cs.unc.edu",
+    duties: "Single point of contact with the client. Sends all client correspondence, gathers requirements, and delivers the weekly written update. Also works on the backend and retrieval layer."
   }
 ];
 
@@ -67,10 +67,9 @@ var SCHEDULE = [
   },
   {
     meeting: "Coach / manager meeting",
-    cadence: "Weekly, time to be confirmed. The current slots conflict with class schedules",
+    cadence: "Weekly, Wednesdays at 12:30 p.m.",
     who:     "All team members and the assigned coach",
     where:   "To be confirmed",
-    tbd:     true
   },
   {
     meeting: "Client meeting with Dr. Fei Yu",
