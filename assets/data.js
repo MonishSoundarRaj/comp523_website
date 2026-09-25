@@ -23,9 +23,9 @@ var TEAM = [
     duties: "Runs team meetings and the schedule, tracks action items and blockers, and coordinates the coach meeting. Breaks ties when the team is split on a decision."
   },
   {
-    name:  "Kevin",
+    name:  "Kevin Peng",
     role:  "Tech Lead",
-    email: "",
+    email: "kevpeng@unc.edu",
     duties: "Owns the architecture, the retrieval and guardrail design, code review standards, and the repository."
   },
   {
