@@ -47,12 +47,12 @@ var TEAM = [
 var CLIENT = {
   name:  "Dr. Fei Yu",
   org:   "School of Information and Library Science, UNC-Chapel Hill",
-  email: ""
+  email: "feifei@unc.edu"
 };
 
 var FACULTY = [
-  { role: "Course instructor",   name: "", email: "" },
-  { role: "Team coach / manager", name: "", email: "" }
+  { role: "Course instructor",   name: "David Stotts", email: "stotts@cs.unc.edu" },
+  { role: "Team coach / manager", name: "Vinir Rai", email: "vinirrai@unc.edu" }
 ];
 
 /* ------------------------------------------------------- regular meetings */
