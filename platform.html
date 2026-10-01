@@ -49,7 +49,7 @@
       of the platform we first wrote down the alternatives without judging them, so that we were
       not quietly defending a choice somebody had already made. Only then did we argue the
       trade-offs and pick.</p>
-      <p>Two of these are still open, and we have said so rather than pretending otherwise. The
+      <p>Two of these are still open, and we say so below instead of pretending otherwise. The
       model provider and the hosting provider both depend on conversations with our client that
       have not happened yet. Everything else is decided.</p>
       <div class="jump">
@@ -76,11 +76,10 @@
       <div class="records">
         <div class="record"><div class="record-title">The dataset arrives as a spreadsheet, and it keeps changing</div>
         <div class="record-body">Roughly 467 rows and about 40 columns, delivered on OneDrive, still being
-        corrected by her research students. Loading it therefore has to be a repeatable job rather
-        than a one-time setup step, and our database schema has to tolerate columns being revised
+        corrected by her research students. Loading it therefore has to be a repeatable job, and our database schema has to tolerate columns being revised
         under us.</div></div>
         <div class="record"><div class="record-title">She has offered hardware with a local model on it</div>
-        <div class="record-body">This is a genuine alternative to a paid API rather than a hypothetical,
+        <div class="record-body">This is a real alternative to a paid API, not a hypothetical,
         and it is the main reason we are keeping the model behind a swappable interface instead of
         writing one provider's SDK through the codebase.</div></div>
         <div class="record"><div class="record-title">She will fund API costs, but wants a justified estimate first</div>
@@ -103,7 +102,7 @@
       <div class="record">
         <div class="record-label">Selected</div>
         <div class="record-title">Python, JavaScript, HTML, SQL</div>
-        <div class="record-body"><strong>For.</strong> Puts each language where it is strongest. Python is where our team is most comfortable working with AI agents and has the most mature libraries for it. SQL follows directly from the data already being tabular.<br><strong>Against.</strong> Two toolchains to set up and keep running rather than one.</div>
+        <div class="record-body"><strong>For.</strong> Puts each language where it is strongest. Python is where our team is most comfortable working with AI agents and has the most mature libraries for it. SQL follows directly from the data already being tabular.<br><strong>Against.</strong> Two toolchains to set up and keep running, not one.</div>
       </div>
       <div class="record">
         <div class="record-title">JavaScript everywhere, no Python</div>
@@ -131,7 +130,7 @@
       <div class="record">
         <div class="record-label">Selected</div>
         <div class="record-title">React</div>
-        <div class="record-body"><strong>For.</strong> It is what our team is most familiar with, which matters more than it sounds in a one semester project. Its component model lets us reuse interface pieces across both the chat view and the librarian admin view. Largest ecosystem of the options here.<br><strong>Against.</strong> It is a library rather than a framework, so routing and state management are extra decisions we have to make ourselves.</div>
+        <div class="record-body"><strong>For.</strong> It is what our team is most familiar with, and over fourteen weeks that counts for more than it sounds like. Its component model lets us reuse interface pieces across both the chat view and the librarian admin view. Largest ecosystem of the options here.<br><strong>Against.</strong> It is a library rather than a framework, so routing and state management are extra decisions we have to make ourselves.</div>
       </div>
       <div class="record">
         <div class="record-title">Vue.js</div>
@@ -147,11 +146,11 @@
       </div>
       <div class="record">
         <div class="record-title">No framework, plain JavaScript and HTML</div>
-        <div class="record-body"><strong>For.</strong> Zero dependencies and the smallest possible payload for rural connections.<br><strong>Against.</strong> We would end up hand-writing state management for a chat interface and an admin panel, which is exactly the work a framework exists to remove.</div>
+        <div class="record-body"><strong>For.</strong> Zero dependencies and the smallest possible payload for rural connections.<br><strong>Against.</strong> We would end up hand-writing state management for a chat interface and an admin panel, which is the work a framework exists to remove.</div>
       </div>
       <div class="record">
         <div class="record-title">React Native</div>
-        <div class="record-body"><strong>For.</strong> Would give us real native mobile applications.<br><strong>Against.</strong> Rejected outright. Our client asked for a responsive web interface, not something patrons have to install. Asking a 72 year old to find an app store listing defeats the purpose.</div>
+        <div class="record-body"><strong>For.</strong> Would give us real native mobile applications.<br><strong>Against.</strong> Our client asked for a responsive web interface, not something patrons have to install. Asking a 72 year old to find an app store listing defeats the purpose.</div>
       </div>
       </div>
       <h4>Phase two: what we chose</h4>
@@ -179,7 +178,7 @@
       </div>
       <div class="record">
         <div class="record-title">Static site talking to the database directly from the browser</div>
-        <div class="record-body"><strong>For.</strong> Simplest possible deployment, and no server to pay for.<br><strong>Against.</strong> Rejected on security grounds. It would put database credentials and model API keys in the browser where any patron could read them, and librarian permission checks would be trivially bypassed.</div>
+        <div class="record-body"><strong>For.</strong> Simplest possible deployment, and no server to pay for.<br><strong>Against.</strong> A non-starter on security. It would put database credentials and model API keys in the browser where any patron could read them, and librarian permission checks would be trivially bypassed.</div>
       </div>
       </div>
       <h4>Phase two: what we chose</h4>
@@ -199,7 +198,7 @@
       </div>
       <div class="record">
         <div class="record-title">SQLite</div>
-        <div class="record-body"><strong>For.</strong> No setup at all, the whole database is one file, and 467 rows is nothing to it. Genuinely tempting at this scale.<br><strong>Against.</strong> Allows one writer at a time, which fits badly with a hosted admin panel that several librarians may use. Vector support is far less standard than pgvector.</div>
+        <div class="record-body"><strong>For.</strong> No setup at all, the whole database is one file, and 467 rows is nothing to it. We argued about this one.<br><strong>Against.</strong> Allows one writer at a time, which fits badly with a hosted admin panel that several librarians may use. Vector support is far less standard than pgvector.</div>
       </div>
       <div class="record">
         <div class="record-title">MongoDB</div>
@@ -211,7 +210,7 @@
       </div>
       <div class="record">
         <div class="record-title">Firebase or Firestore</div>
-        <div class="record-body"><strong>For.</strong> A full platform with authentication and hosting included, and it has served past COMP 523 teams well.<br><strong>Against.</strong> Document model again mismatched to tabular data, querying across 40 columns is awkward, and it is the deepest vendor lock-in of the options, which matters for a handoff.</div>
+        <div class="record-body"><strong>For.</strong> A full platform with authentication and hosting included, and it has served past COMP 523 teams well.<br><strong>Against.</strong> Document model again mismatched to tabular data, querying across 40 columns is awkward, and it is the deepest vendor lock-in here, which becomes a problem the day we hand the system over.</div>
       </div>
       </div>
       <h4>Phase two: what we chose</h4>
@@ -227,11 +226,11 @@
       <div class="record">
         <div class="record-label">Selected</div>
         <div class="record-title">Drizzle ORM</div>
-        <div class="record-body"><strong>For.</strong> TypeScript first, so the roughly 40 fields on every record stay type checked between the database and the application rather than failing at runtime. Generates plain readable SQL, which matters because we will need pgvector operators and hand written queries.<br><strong>Against.</strong> Younger than the alternatives, with a smaller community and fewer answered questions when we get stuck.</div>
+        <div class="record-body"><strong>For.</strong> TypeScript first, so the roughly 40 fields on every record stay type checked between the database and the application, so mistakes surface before they ship. Generates plain readable SQL, and we will need that for pgvector operators and hand written queries.<br><strong>Against.</strong> Younger than the alternatives, with a smaller community and fewer answered questions when we get stuck.</div>
       </div>
       <div class="record">
         <div class="record-title">Prisma</div>
-        <div class="record-body"><strong>For.</strong> The most mature option, excellent developer experience, and migrations are a solved problem.<br><strong>Against.</strong> Heavier runtime, and historically awkward when you need raw SQL or database extensions, which is precisely our pgvector case.</div>
+        <div class="record-body"><strong>For.</strong> The most mature option, excellent developer experience, and migrations are a solved problem.<br><strong>Against.</strong> Heavier runtime, and historically awkward when you need raw SQL or database extensions, which is our pgvector case.</div>
       </div>
       <div class="record">
         <div class="record-title">Sequelize</div>
@@ -239,7 +238,7 @@
       </div>
       <div class="record">
         <div class="record-title">Raw SQL through node-postgres</div>
-        <div class="record-body"><strong>For.</strong> Total control, no abstraction to fight, and nothing to learn.<br><strong>Against.</strong> No type safety across 40 columns, which is exactly where our mistakes are going to happen.</div>
+        <div class="record-body"><strong>For.</strong> Total control, no abstraction to fight, and nothing to learn.<br><strong>Against.</strong> No type safety across 40 columns, and that is where our mistakes are going to happen.</div>
       </div>
       <div class="record">
         <div class="record-title">SQLAlchemy</div>
@@ -270,7 +269,7 @@
       </div>
       <div class="record">
         <div class="record-title">A hosted model API</div>
-        <div class="record-body"><strong>For.</strong> Best instruction following, which is what our guardrails actually depend on. The assistant has to cite sources and has to be willing to say it does not know, and hosted models are more reliable at exactly that.<br><strong>Against.</strong> Ongoing cost, and patron health questions leave our client's control.</div>
+        <div class="record-body"><strong>For.</strong> Best instruction following, which is what our guardrails actually depend on. The assistant has to cite sources and has to be willing to say it does not know, and hosted models are more reliable at that.<br><strong>Against.</strong> Ongoing cost, and patron health questions leave our client's control.</div>
       </div>
       <div class="record">
         <div class="record-title">An open-weight model run locally on our client's hardware</div>
@@ -319,7 +318,7 @@
       <div class="records">
       <div class="record">
         <div class="record-title">Heroku</div>
-        <div class="record-body"><strong>For.</strong> The course's traditional choice, well documented, and genuinely simple to deploy to.<br><strong>Against.</strong> Heroku ended its free product plans in November 2022. Every dyno and every Postgres instance now costs money from day one, which makes it a poor fit for a project we have to hand to a client who may not want a recurring bill.</div>
+        <div class="record-body"><strong>For.</strong> The course's traditional choice, well documented, and simple to deploy to.<br><strong>Against.</strong> Heroku ended its free product plans in November 2022. Every dyno and every Postgres instance now costs money from day one, which makes it a poor fit for a project we have to hand to a client who may not want a recurring bill.</div>
       </div>
       <div class="record">
         <div class="record-title">Render</div>
@@ -343,7 +342,7 @@
       </div>
       <div class="record">
         <div class="record-title">Docker and Kubernetes</div>
-        <div class="record-body"><strong>For.</strong> Portable and the industry standard at scale.<br><strong>Against.</strong> Rejected. Vastly more infrastructure than a four person semester project needs, and completely unmaintainable by our client afterwards.</div>
+        <div class="record-body"><strong>For.</strong> Portable and the industry standard at scale.<br><strong>Against.</strong> Vastly more infrastructure than a four person semester project needs, and completely unmaintainable by our client afterwards.</div>
       </div>
       </div>
       <h4>Phase two: what we chose</h4>
@@ -360,7 +359,7 @@
       <div class="record">
         <div class="record-label">Selected</div>
         <div class="record-title">Responsive web, all current browsers</div>
-        <div class="record-body"><strong>For.</strong> One codebase reaches every device our personas actually use. Nothing to install, which matters for an older patron who will not go hunting through an app store.<br><strong>Against.</strong> We have to test across more browsers and screen sizes than a single-target app would.</div>
+        <div class="record-body"><strong>For.</strong> One codebase reaches every device our personas actually use. Nothing to install, and an older patron is not going to go hunting through an app store.<br><strong>Against.</strong> We have to test across more browsers and screen sizes than a single-target app would.</div>
       </div>
       <div class="record">
         <div class="record-title">Native mobile applications</div>
@@ -368,11 +367,11 @@
       </div>
       <div class="record">
         <div class="record-title">Desktop only</div>
-        <div class="record-body"><strong>For.</strong> Simplest to build and test.<br><strong>Against.</strong> Rejected immediately. One of our four personas is a teenager with nothing but a phone.</div>
+        <div class="record-body"><strong>For.</strong> Simplest to build and test.<br><strong>Against.</strong> One of our four personas is a teenager with nothing but a phone.</div>
       </div>
       </div>
       <h4>Phase two: what we chose</h4>
-      <p class="note">Modern desktop browsers such as Chrome, Safari, Firefox, and Edge, as well as mobile web environments such as Safari on iOS and Chrome on Android. No specific hardware or operating system. We are targeting WCAG 2.1 AA throughout, which is a requirement rather than an aspiration given our personas.</p>
+      <p class="note">Modern desktop browsers such as Chrome, Safari, Firefox, and Edge, as well as mobile web environments such as Safari on iOS and Chrome on Android. No specific hardware or operating system. We are targeting WCAG 2.1 AA throughout, which is a requirement for us, not an aspiration, given our personas.</p>
       <p class="small muted">References: <a href="https://www.w3.org/TR/WCAG21/" rel="noopener noreferrer">WCAG 2.1</a></p>
     </div>
   </section>
