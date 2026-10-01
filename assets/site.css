@@ -295,6 +295,15 @@ code {
   line-height: 1.7;
 }
 
+/* -------------------------------------------------------------- diagram  */
+
+.diagram { margin: 0; padding: 0; overflow-x: auto; }
+.diagram svg { display: block; width: 100%; min-width: 940px; height: auto; }
+.diagram-caption {
+  font-size: 15px; line-height: 1.65; color: var(--muted);
+  margin-top: 20px; max-width: var(--measure);
+}
+
 /* ---------------------------------------------------------------- footer  */
 
 .sitefoot {

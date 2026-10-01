@@ -9,7 +9,7 @@
    order, so add new entries anywhere in the array.
    ========================================================================== */
 
-var LAST_UPDATED = "2026-09-25";
+var LAST_UPDATED = "2026-10-01";
 
 /* --------------------------------------------------------------- the team
    Fill in full names and @unc.edu addresses. The one-click "email the whole
@@ -103,6 +103,8 @@ var DELIVERABLES = [
   { name: "Literature review: AI chatbots in library reference", due: "2026-10-02", status: "wip",  where: "In progress" },
   { name: "API cost estimate for the client",                     due: "2026-10-02", status: "wip",  where: "In progress" },
   { name: "Dataset received and reviewed",                        due: "2026-10-02", status: "wip",  where: "Awaiting client" },
+  { name: "Architecture diagram",                                 due: "2026-10-01", status: "done", where: "Architecture" },
+  { name: "XP-style system metaphor",                             due: "2026-10-01", status: "done", where: "Architecture" },
   { name: "Architecture and design document",                     due: "",           status: "todo", where: "Not started" },
   { name: "First working version (proof of concept)",             due: "",           status: "todo", where: "Estimated 2 to 5 weeks from kickoff" },
   { name: "Client acceptance testing",                            due: "",           status: "todo", where: "Not started" },
@@ -112,6 +114,12 @@ var DELIVERABLES = [
 /* --------------------------------------------------------------- timeline */
 
 var TIMELINE = [
+  {
+    date: "2026-10-01",
+    kind: "Deliverable",
+    title: "Architecture diagram and system metaphor published",
+    body: "The system is documented as a client-server web application: a React interface in the browser, a Node.js application server, a Python AI service, and PostgreSQL. The diagram separates what we build from the three things we inherit, which are the client's dataset, the library resource websites, and the language model provider. Our metaphor is the reference desk, open at two in the morning."
+  },
   {
     date: "2026-09-25",
     kind: "Deliverable",
