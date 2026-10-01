@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>System Metaphor | F26 COMP 523</title>
+<meta name="description" content="The XP-style system metaphor for Library Navigator: the reference desk, open at two in the morning.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="masthead">
+    <a class="brand" href="index.html">F26 &middot; COMP 523</a>
+    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" data-page="index.html">The Project</a>
+      <a href="team.html" data-page="team.html">Meet the Team</a>
+      <a href="meetings.html" data-page="meetings.html">Meetings and Decisions</a>
+      <div class="menu">
+        <button class="menubtn" type="button" aria-expanded="false" aria-haspopup="true">Deliverables</button>
+        <ul class="menulist">
+          <li><a href="specification.html" data-page="specification.html">Specification</a></li>
+          <li><a href="platform.html" data-page="platform.html">Platform Selection</a></li>
+          <li><a href="architecture.html" data-page="architecture.html">Architecture</a></li>
+          <li><a href="metaphor.html" data-page="metaphor.html">System Metaphor</a></li>
+          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Project Timeline</a></li>
+          <li><a href="resources.html" data-page="resources.html">Related Links</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="pagehead">
+    <h1 class="pagetitle">System Metaphor</h1>
+    <p class="deck">An XP-style system metaphor. One shared picture of the system that the whole team, our client, and the librarians can all use.</p>
+  </div>
+
+  <section class="section">
+    <div class="col">
+      <p class="lede">Library Navigator is the reference desk, open at two in the morning.</p>
+      <p>You walk up and describe what you need in your own words. The person behind the desk
+      knows what <em>this</em> library actually has, not what libraries have in general, so they
+      do not send you to a site that wants a card you were never issued. They do not just point
+      at a shelf either. They walk you over, show you where the login is, and wait while you try
+      it. And when they are not sure, they say so and go ask someone, instead of guessing and
+      sounding confident.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="col">
+      <h2>Why this one</h2>
+      <p>We wanted a metaphor our client and the librarians could use without translation, and
+      the reference desk is the thing our system is replacing after hours. It also settles
+      arguments. When we cannot agree whether a feature belongs, the question becomes whether a
+      good reference librarian would do it. A good one does not lecture you about database
+      licensing. A good one does not pretend to know. A good one walks you over.</p>
+      <p>It keeps us honest about the hard parts too. The reason the assistant refuses to answer
+      at low confidence is not a technical rule we invented. It is what the person at the desk
+      does when they are unsure.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="col">
+      <h2>The names it gives us</h2>
+      <p class="muted">XP asks that the metaphor carry through into what we call things. These
+      are the words we use in design discussions and in the code.</p>
+      <div class="records">
+        <div class="record"><div class="pair"><div class="pair-term">The desk</div><div class="pair-body">The chat interface. Where someone walks up and asks.</div></div></div>
+        <div class="record"><div class="pair"><div class="pair-term">The librarian</div><div class="pair-body">The AI service. Answers from what this branch holds, and cites it.</div></div></div>
+        <div class="record"><div class="pair"><div class="pair-term">The shelf list</div><div class="pair-body">The curated dataset in PostgreSQL. What this library actually carries.</div></div></div>
+        <div class="record"><div class="pair"><div class="pair-term">Walking you over</div><div class="pair-body">Guided step-by-step navigation. One instruction, then wait.</div></div></div>
+        <div class="record"><div class="pair"><div class="pair-term">Let me check on that</div><div class="pair-body">Low-confidence escalation. No answer is asserted; a human is offered.</div></div></div>
+        <div class="record"><div class="pair"><div class="pair-term">Keeping the list</div><div class="pair-body">The librarian admin panel, the audit log, and the review queue.</div></div></div>
+        <div class="record"><div class="pair"><div class="pair-term">The back office</div><div class="pair-body">The server. Patrons never see it, and nothing sensitive leaves it.</div></div></div>
+      </div>
+      <p class="small muted" style="margin-top:28px">See also the
+      <a href="architecture.html">architecture diagram</a>, which shows the same pieces as
+      software rather than as people.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="platform.html">Platform Selection</a><a href="architecture.html">Architecture</a><a href="metaphor.html">System Metaphor</a><a href="deliverables.html">Deliverables Index</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a></div>
+    <p>Library Navigator. COMP 523 Software Engineering Laboratory, Department of
+    Computer Science, UNC-Chapel Hill, Fall 2026.</p>
+    <p class="updated small"></p>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

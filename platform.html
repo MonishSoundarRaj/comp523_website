@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platform Selection | F26 COMP 523</title>
+<meta name="description" content="Evaluation of alternative development platforms for Library Navigator, with pros and cons, references, and the choices we made.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="masthead">
+    <a class="brand" href="index.html">F26 &middot; COMP 523</a>
+    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" data-page="index.html">The Project</a>
+      <a href="team.html" data-page="team.html">Meet the Team</a>
+      <a href="meetings.html" data-page="meetings.html">Meetings and Decisions</a>
+      <div class="menu">
+        <button class="menubtn" type="button" aria-expanded="false" aria-haspopup="true">Deliverables</button>
+        <ul class="menulist">
+          <li><a href="specification.html" data-page="specification.html">Specification</a></li>
+          <li><a href="platform.html" data-page="platform.html">Platform Selection</a></li>
+          <li><a href="architecture.html" data-page="architecture.html">Architecture</a></li>
+          <li><a href="metaphor.html" data-page="metaphor.html">System Metaphor</a></li>
+          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Project Timeline</a></li>
+          <li><a href="resources.html" data-page="resources.html">Related Links</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="pagehead">
+    <h1 class="pagetitle">Platform Selection</h1>
+    <p class="deck">Every alternative we looked at, what we picked, and why. Written so that we
+    can reconstruct these decisions in two months when we have forgotten the arguments.</p>
+  </div>
+
+  <section class="section">
+    <div class="col">
+      <h2>How we evaluated</h2>
+      <p>The course asks for a two-step process, and we followed it deliberately. For each part
+      of the platform we first wrote down the alternatives without judging them, so that we were
+      not quietly defending a choice somebody had already made. Only then did we argue the
+      trade-offs and pick.</p>
+      <p>Two of these are still open, and we have said so rather than pretending otherwise. The
+      model provider and the hosting provider both depend on conversations with our client that
+      have not happened yet. Everything else is decided.</p>
+      <div class="jump">
+        <a href="#constraints">Client constraints</a>
+        <a href="#languages">Languages</a>
+        <a href="#frontend">Front end</a>
+        <a href="#backend">Back end</a>
+        <a href="#database">Database</a>
+        <a href="#orm">Data access</a>
+        <a href="#ai">AI layer</a>
+        <a href="#charting">Charting</a>
+        <a href="#hosting">Hosting and handoff</a>
+        <a href="#target">Target environment</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="constraints">
+    <div class="col">
+      <h2>Constraints from our client</h2>
+      <p>Our client did not dictate a language, a framework, or a database, so most of this
+      document is our own judgment. She did constrain us in four ways that shaped real
+      decisions.</p>
+      <div class="records">
+        <div class="record"><div class="record-title">The dataset arrives as a spreadsheet, and it keeps changing</div>
+        <div class="record-body">Roughly 467 rows and about 40 columns, delivered on OneDrive, still being
+        corrected by her research students. Loading it therefore has to be a repeatable job rather
+        than a one-time setup step, and our database schema has to tolerate columns being revised
+        under us.</div></div>
+        <div class="record"><div class="record-title">She has offered hardware with a local model on it</div>
+        <div class="record-body">This is a genuine alternative to a paid API rather than a hypothetical,
+        and it is the main reason we are keeping the model behind a swappable interface instead of
+        writing one provider's SDK through the codebase.</div></div>
+        <div class="record"><div class="record-title">She will fund API costs, but wants a justified estimate first</div>
+        <div class="record-body">Cost is a live constraint on the AI layer, not an afterthought. We owe
+        her that estimate, and we cannot write it until the provider question is settled.</div></div>
+        <div class="record"><div class="record-title">Librarians must be able to govern the data</div>
+        <div class="record-body">This forces authentication, an audit log, and an override path into the
+        design. It is why a purely static or browser-only architecture was never an option.</div></div>
+      </div>
+      <p>One further constraint comes from the course rather than the client: this has to be
+      something she can keep running after we are gone. That weighs heavily in the hosting
+      section below.</p>
+    </div>
+  </section>
+  <section class="section" id="languages">
+    <div class="col">
+      <h2>Programming languages</h2>
+      <h4>Phase one: alternatives considered</h4>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">Selected</div>
+        <div class="record-title">Python, JavaScript, HTML, SQL</div>
+        <div class="record-body"><strong>For.</strong> Puts each language where it is strongest. Python is where our team is most comfortable working with AI agents and has the most mature libraries for it. SQL follows directly from the data already being tabular.<br><strong>Against.</strong> Two toolchains to set up and keep running rather than one.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">JavaScript everywhere, no Python</div>
+        <div class="record-body"><strong>For.</strong> One language across the whole project, the smallest possible setup, and one dependency manager.<br><strong>Against.</strong> Gives up the ecosystem our team is most fluent in for the model-facing work.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Python everywhere, with Django or Flask templates</div>
+        <div class="record-body"><strong>For.</strong> A single language, and the framework handles routing and admin scaffolding for free.<br><strong>Against.</strong> Means giving up React. Server-rendered templates are a poor fit for a chat interface that updates incrementally as an answer arrives.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">A statically typed language such as Java or C#</div>
+        <div class="record-body"><strong>For.</strong> Strong typing and very mature tooling.<br><strong>Against.</strong> Nobody on the team works in them day to day. In a fourteen week project the learning curve is cost with no return.</div>
+      </div>
+      </div>
+      <h4>Phase two: what we chose</h4>
+      <p class="note">Python, JavaScript, HTML, SQL. JavaScript and HTML because the product is a web application, SQL for retrieving data from the database, and Python because it is the language we are most comfortable with for interacting with AI agents. TypeScript comes along with the Drizzle decision below, since Drizzle is TypeScript first.</p>
+      <p class="small muted">References: <a href="https://www.python.org" rel="noopener noreferrer">Python</a> &middot; <a href="https://www.typescriptlang.org" rel="noopener noreferrer">TypeScript</a> &middot; <a href="https://pandas.pydata.org" rel="noopener noreferrer">pandas</a></p>
+    </div>
+  </section>
+  <section class="section" id="frontend">
+    <div class="col">
+      <h2>Front end framework</h2>
+      <h4>Phase one: alternatives considered</h4>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">Selected</div>
+        <div class="record-title">React</div>
+        <div class="record-body"><strong>For.</strong> It is what our team is most familiar with, which matters more than it sounds in a one semester project. Its component model lets us reuse interface pieces across both the chat view and the librarian admin view. Largest ecosystem of the options here.<br><strong>Against.</strong> It is a library rather than a framework, so routing and state management are extra decisions we have to make ourselves.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Vue.js</div>
+        <div class="record-body"><strong>For.</strong> Gentler learning curve than React and more included out of the box.<br><strong>Against.</strong> No one on the team has shipped anything in it.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Angular</div>
+        <div class="record-body"><strong>For.</strong> Opinionated and complete. Routing, forms, and HTTP all come with it, and TypeScript is the default.<br><strong>Against.</strong> The steepest learning curve of the three, and far heavier than an application of this size needs.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Svelte</div>
+        <div class="record-body"><strong>For.</strong> Less boilerplate and smaller bundles, which is attractive given our slow-connection requirement.<br><strong>Against.</strong> Smallest ecosystem here and no team experience, so every problem would be a first.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">No framework, plain JavaScript and HTML</div>
+        <div class="record-body"><strong>For.</strong> Zero dependencies and the smallest possible payload for rural connections.<br><strong>Against.</strong> We would end up hand-writing state management for a chat interface and an admin panel, which is exactly the work a framework exists to remove.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">React Native</div>
+        <div class="record-body"><strong>For.</strong> Would give us real native mobile applications.<br><strong>Against.</strong> Rejected outright. Our client asked for a responsive web interface, not something patrons have to install. Asking a 72 year old to find an app store listing defeats the purpose.</div>
+      </div>
+      </div>
+      <h4>Phase two: what we chose</h4>
+      <p class="note">React on top of JavaScript and HTML. React's component model allows us to reuse UI elements across both the chat interface and the separate librarian admin view, while maintaining a responsive web interface across desktop and mobile browsers.</p>
+      <p class="small muted">References: <a href="https://react.dev" rel="noopener noreferrer">React</a> &middot; <a href="https://vuejs.org" rel="noopener noreferrer">Vue.js</a> &middot; <a href="https://angular.dev" rel="noopener noreferrer">Angular</a> &middot; <a href="https://tailwindcss.com" rel="noopener noreferrer">Tailwind CSS</a></p>
+    </div>
+  </section>
+  <section class="section" id="backend">
+    <div class="col">
+      <h2>Back end architecture and runtime</h2>
+      <h4>Phase one: alternatives considered</h4>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">Selected</div>
+        <div class="record-title">Client-server, with a Node.js application server</div>
+        <div class="record-body"><strong>For.</strong> Keeps one language across the front end and the server. Required anyway, since our model API keys and the check for whether somebody is actually a librarian cannot live in the browser. Pairs naturally with Drizzle.<br><strong>Against.</strong> Means our Python AI work either runs as a separate service or moves offline into the data pipeline.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Client-server, with a Python back end such as FastAPI or Django</div>
+        <div class="record-body"><strong>For.</strong> Keeps the AI work in the language our team prefers for it, in a single service.<br><strong>Against.</strong> Loses the shared language with the front end, and rules out Drizzle, which is the ORM we judged best below.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Serverless functions</div>
+        <div class="record-body"><strong>For.</strong> No servers to manage and a generous free tier on most providers.<br><strong>Against.</strong> Cold starts work against our five second response target on an already slow model call, and the handoff story is more complicated for a non-technical client.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Static site talking to the database directly from the browser</div>
+        <div class="record-body"><strong>For.</strong> Simplest possible deployment, and no server to pay for.<br><strong>Against.</strong> Rejected on security grounds. It would put database credentials and model API keys in the browser where any patron could read them, and librarian permission checks would be trivially bypassed.</div>
+      </div>
+      </div>
+      <h4>Phase two: what we chose</h4>
+      <p class="note">A client-server system. Client-server architecture is required to protect AI API keys and librarian credential checks. The application server is Node.js, which follows from choosing Drizzle and keeps the server in the same language as the front end.</p>
+      <p class="small muted">References: <a href="https://nodejs.org" rel="noopener noreferrer">Node.js</a> &middot; <a href="https://expressjs.com" rel="noopener noreferrer">Express</a> &middot; <a href="https://authjs.dev" rel="noopener noreferrer">Auth.js</a></p>
+    </div>
+  </section>
+  <section class="section" id="database">
+    <div class="col">
+      <h2>Database</h2>
+      <h4>Phase one: alternatives considered</h4>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">Selected</div>
+        <div class="record-title">PostgreSQL</div>
+        <div class="record-body"><strong>For.</strong> Relational, which matches a dataset that is already a table with fixed columns. Handles the ZIP code to county to library system to outlet relationships as ordinary joins. The pgvector extension gives us vector search later without adding another service. Free managed tiers exist.<br><strong>Against.</strong> Needs a hosted instance, so slightly more setup than a file-based database.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">SQLite</div>
+        <div class="record-body"><strong>For.</strong> No setup at all, the whole database is one file, and 467 rows is nothing to it. Genuinely tempting at this scale.<br><strong>Against.</strong> Allows one writer at a time, which fits badly with a hosted admin panel that several librarians may use. Vector support is far less standard than pgvector.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">MongoDB</div>
+        <div class="record-body"><strong>For.</strong> Flexible schema, which is appealing while the client's columns are still being revised.<br><strong>Against.</strong> The data is already tabular with fixed columns, so the flexibility buys us little, and we would be writing application code to do joins the database should be doing.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">MySQL</div>
+        <div class="record-body"><strong>For.</strong> Mature, extremely widely hosted, and well understood.<br><strong>Against.</strong> No equivalent to pgvector, and nothing it does better than Postgres for this workload.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Firebase or Firestore</div>
+        <div class="record-body"><strong>For.</strong> A full platform with authentication and hosting included, and it has served past COMP 523 teams well.<br><strong>Against.</strong> Document model again mismatched to tabular data, querying across 40 columns is awkward, and it is the deepest vendor lock-in of the options, which matters for a handoff.</div>
+      </div>
+      </div>
+      <h4>Phase two: what we chose</h4>
+      <p class="note">PostgreSQL. Postgres fits the client's tabular dataset structure, and keeping vector search in the same database through pgvector avoids standing up a second service that could drift out of sync with the records it describes.</p>
+      <p class="small muted">References: <a href="https://www.postgresql.org" rel="noopener noreferrer">PostgreSQL</a> &middot; <a href="https://github.com/pgvector/pgvector" rel="noopener noreferrer">pgvector</a> &middot; <a href="https://www.sqlite.org" rel="noopener noreferrer">SQLite</a> &middot; <a href="https://www.mongodb.com" rel="noopener noreferrer">MongoDB</a></p>
+    </div>
+  </section>
+  <section class="section" id="orm">
+    <div class="col">
+      <h2>Data access and ORM</h2>
+      <h4>Phase one: alternatives considered</h4>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">Selected</div>
+        <div class="record-title">Drizzle ORM</div>
+        <div class="record-body"><strong>For.</strong> TypeScript first, so the roughly 40 fields on every record stay type checked between the database and the application rather than failing at runtime. Generates plain readable SQL, which matters because we will need pgvector operators and hand written queries.<br><strong>Against.</strong> Younger than the alternatives, with a smaller community and fewer answered questions when we get stuck.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Prisma</div>
+        <div class="record-body"><strong>For.</strong> The most mature option, excellent developer experience, and migrations are a solved problem.<br><strong>Against.</strong> Heavier runtime, and historically awkward when you need raw SQL or database extensions, which is precisely our pgvector case.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Sequelize</div>
+        <div class="record-body"><strong>For.</strong> Long established and very widely deployed.<br><strong>Against.</strong> Weaker TypeScript support, which removes the main reason we wanted an ORM here at all.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Raw SQL through node-postgres</div>
+        <div class="record-body"><strong>For.</strong> Total control, no abstraction to fight, and nothing to learn.<br><strong>Against.</strong> No type safety across 40 columns, which is exactly where our mistakes are going to happen.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">SQLAlchemy</div>
+        <div class="record-body"><strong>For.</strong> The obvious choice if the back end were Python.<br><strong>Against.</strong> Only applicable under a back end we did not choose.</div>
+      </div>
+      </div>
+      <h4>Phase two: what we chose</h4>
+      <p class="note">Drizzle ORM. Drizzle provides TypeScript-first type safety between the database and the application, rather than causing issues at runtime.</p>
+      <p class="small muted">References: <a href="https://orm.drizzle.team" rel="noopener noreferrer">Drizzle</a> &middot; <a href="https://www.prisma.io" rel="noopener noreferrer">Prisma</a> &middot; <a href="https://sequelize.org" rel="noopener noreferrer">Sequelize</a></p>
+    </div>
+  </section>
+  <section class="section" id="ai">
+    <div class="col">
+      <h2>AI layer: retrieval and model provider</h2>
+      <h4>Phase one: alternatives considered</h4>
+      <div class="records">
+      <div class="record">
+        <div class="record-title">Structured SQL filtering with Postgres full text search</div>
+        <div class="record-body"><strong>For.</strong> At 467 rows, filtering to the user's own library system already narrows the candidates to a handful. Costs nothing and adds no dependency.<br><strong>Against.</strong> Misses wording mismatches, where a patron says managing diabetes and the record says chronic disease resources.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Embeddings stored in pgvector, on top of that filtering</div>
+        <div class="record-body"><strong>For.</strong> Handles the wording mismatch. Lives in the database we already have, so a librarian's edit and its re-embedding happen together.<br><strong>Against.</strong> Adds an embedding step to the data pipeline that has to be rerun whenever the dataset is revised.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">A dedicated vector database such as Pinecone or Chroma</div>
+        <div class="record-body"><strong>For.</strong> Purpose built, and scales far past anything we need.<br><strong>Against.</strong> Another service, another bill, and embeddings that can drift out of sync with the records. Heavy overkill for 467 rows.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">A hosted model API</div>
+        <div class="record-body"><strong>For.</strong> Best instruction following, which is what our guardrails actually depend on. The assistant has to cite sources and has to be willing to say it does not know, and hosted models are more reliable at exactly that.<br><strong>Against.</strong> Ongoing cost, and patron health questions leave our client's control.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">An open-weight model run locally on our client's hardware</div>
+        <div class="record-body"><strong>For.</strong> No per-query cost at all, and nothing sensitive leaves her machine. She has already offered us the laptop.<br><strong>Against.</strong> Weaker instruction following, and a harder deployment and handoff story for a non-technical owner.</div>
+      </div>
+      </div>
+      <h4>Phase two: what we chose</h4>
+      <p><span class="tbd">Open. The provider decision depends on the cost estimate we owe our client, and on whether she wants health questions to stay on her own hardware.</span></p>
+      <p class="note">Retrieval is decided: structured filtering first, with pgvector embeddings layered on top for wording mismatches, and no external vector database. The model provider is not decided. We are keeping it behind one swappable interface so that the choice stays reversible, and we owe our client a cost estimate before anything paid is switched on.</p>
+      <p class="small muted">References: <a href="https://github.com/pgvector/pgvector" rel="noopener noreferrer">pgvector</a> &middot; <a href="https://www.trychroma.com" rel="noopener noreferrer">Chroma</a> &middot; <a href="https://www.pinecone.io" rel="noopener noreferrer">Pinecone</a> &middot; <a href="https://ollama.com" rel="noopener noreferrer">Ollama</a></p>
+    </div>
+  </section>
+  <section class="section" id="charting">
+    <div class="col">
+      <h2>Charting and data visualization</h2>
+      <h4>Phase one: alternatives considered</h4>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">Selected</div>
+        <div class="record-title">No charting at all</div>
+        <div class="record-body"><strong>For.</strong> Nothing in the patron interface needs it. It is a conversation plus a list of resources.<br><strong>Against.</strong> Leaves librarians without a view of where the dataset is failing people.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Recharts</div>
+        <div class="record-body"><strong>For.</strong> React components, so it drops straight into our stack with no wrapper.<br><strong>Against.</strong> Less flexible than D3 once you want something unusual.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Chart.js</div>
+        <div class="record-body"><strong>For.</strong> Small, fast, and very well documented.<br><strong>Against.</strong> Canvas based, so using it inside React means managing refs by hand.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">D3</div>
+        <div class="record-body"><strong>For.</strong> Can draw anything.<br><strong>Against.</strong> Enormously more power than a frequency bar chart justifies, and the steepest learning curve here.</div>
+      </div>
+      </div>
+      <h4>Phase two: what we chose</h4>
+      <p class="note">None required for the user end. We may implement light metric visualizations in the librarian admin panel to highlight unanswered questions and uncover dataset gaps. If time permits, this will be built using a React charting library like Recharts or Chart.js. We are not processing images or video at all; the dataset is text, URLs, and metadata.</p>
+      <p class="small muted">References: <a href="https://recharts.org" rel="noopener noreferrer">Recharts</a> &middot; <a href="https://www.chartjs.org" rel="noopener noreferrer">Chart.js</a> &middot; <a href="https://d3js.org" rel="noopener noreferrer">D3</a></p>
+    </div>
+  </section>
+  <section class="section" id="hosting">
+    <div class="col">
+      <h2>Hosting, handoff, and fees</h2>
+      <p class="muted">The course has historically defaulted to Heroku. That is no longer a free option, so we evaluated this from scratch.</p>
+      <h4>Phase one: alternatives considered</h4>
+      <div class="records">
+      <div class="record">
+        <div class="record-title">Heroku</div>
+        <div class="record-body"><strong>For.</strong> The course's traditional choice, well documented, and genuinely simple to deploy to.<br><strong>Against.</strong> Heroku ended its free product plans in November 2022. Every dyno and every Postgres instance now costs money from day one, which makes it a poor fit for a project we have to hand to a client who may not want a recurring bill.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Render</div>
+        <div class="record-body"><strong>For.</strong> Free tier for web services, managed Postgres, and a deployment model close to what Heroku offered.<br><strong>Against.</strong> Free instances sleep when idle, so the first request after a quiet period is slow.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Railway</div>
+        <div class="record-body"><strong>For.</strong> Very fast to set up, and the database and application sit together.<br><strong>Against.</strong> Free usage is credit based rather than a standing free tier, so an idle project can still accrue cost.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Fly.io</div>
+        <div class="record-body"><strong>For.</strong> Runs close to users and handles persistent services well.<br><strong>Against.</strong> More infrastructure knowledge required than the others, which hurts the handoff.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Vercel plus a managed Postgres provider such as Neon or Supabase</div>
+        <div class="record-body"><strong>For.</strong> Strong free tiers on both halves, trivial deployment, and Neon and Supabase both support pgvector.<br><strong>Against.</strong> Splits the system across two vendors and two dashboards, which is one more thing to explain at handoff.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">A university-hosted or client-hosted server</div>
+        <div class="record-body"><strong>For.</strong> No commercial dependency, and the client keeps full control of patron data.<br><strong>Against.</strong> Someone has to administer it. Our client's group does not have staff for that, and it would not outlive us either.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Docker and Kubernetes</div>
+        <div class="record-body"><strong>For.</strong> Portable and the industry standard at scale.<br><strong>Against.</strong> Rejected. Vastly more infrastructure than a four person semester project needs, and completely unmaintainable by our client afterwards.</div>
+      </div>
+      </div>
+      <h4>Phase two: what we chose</h4>
+      <p><span class="tbd">Open. Pending a conversation with our client about long term cost and who maintains the deployment after handoff.</span></p>
+      <p class="note">Not yet decided. Our shortlist is Render, or Vercel paired with Neon or Supabase, because both keep the project inside a free tier during development and both support pgvector. The deciding factor is not developer convenience but handoff: this system has to keep running after we leave, so we need to know from our client whether she can carry a small recurring cost or whether a free tier is a hard requirement. That is on the agenda for our next client meeting.</p>
+      <p class="small muted">References: <a href="https://www.heroku.com" rel="noopener noreferrer">Heroku</a> &middot; <a href="https://render.com" rel="noopener noreferrer">Render</a> &middot; <a href="https://railway.com" rel="noopener noreferrer">Railway</a> &middot; <a href="https://fly.io" rel="noopener noreferrer">Fly.io</a> &middot; <a href="https://vercel.com" rel="noopener noreferrer">Vercel</a> &middot; <a href="https://neon.com" rel="noopener noreferrer">Neon</a> &middot; <a href="https://supabase.com" rel="noopener noreferrer">Supabase</a></p>
+    </div>
+  </section>
+  <section class="section" id="target">
+    <div class="col">
+      <h2>Target environment</h2>
+      <h4>Phase one: alternatives considered</h4>
+      <div class="records">
+      <div class="record">
+        <div class="record-label">Selected</div>
+        <div class="record-title">Responsive web, all current browsers</div>
+        <div class="record-body"><strong>For.</strong> One codebase reaches every device our personas actually use. Nothing to install, which matters for an older patron who will not go hunting through an app store.<br><strong>Against.</strong> We have to test across more browsers and screen sizes than a single-target app would.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Native mobile applications</div>
+        <div class="record-body"><strong>For.</strong> Better offline behaviour and a presence in the app stores.<br><strong>Against.</strong> Two more codebases, an install step our users will not take, and no requirement from the client for it.</div>
+      </div>
+      <div class="record">
+        <div class="record-title">Desktop only</div>
+        <div class="record-body"><strong>For.</strong> Simplest to build and test.<br><strong>Against.</strong> Rejected immediately. One of our four personas is a teenager with nothing but a phone.</div>
+      </div>
+      </div>
+      <h4>Phase two: what we chose</h4>
+      <p class="note">Modern desktop browsers such as Chrome, Safari, Firefox, and Edge, as well as mobile web environments such as Safari on iOS and Chrome on Android. No specific hardware or operating system. We are targeting WCAG 2.1 AA throughout, which is a requirement rather than an aspiration given our personas.</p>
+      <p class="small muted">References: <a href="https://www.w3.org/TR/WCAG21/" rel="noopener noreferrer">WCAG 2.1</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="platform.html">Platform Selection</a><a href="architecture.html">Architecture</a><a href="metaphor.html">System Metaphor</a><a href="deliverables.html">Deliverables Index</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a></div>
+    <p>Library Navigator. COMP 523 Software Engineering Laboratory, Department of
+    Computer Science, UNC-Chapel Hill, Fall 2026.</p>
+    <p class="updated small"></p>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

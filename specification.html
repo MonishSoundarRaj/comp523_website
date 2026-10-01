@@ -18,12 +18,14 @@
       <a href="index.html" data-page="index.html">The Project</a>
       <a href="team.html" data-page="team.html">Meet the Team</a>
       <a href="meetings.html" data-page="meetings.html">Meetings and Decisions</a>
-      <a href="specification.html" data-page="specification.html">Specification</a>
       <div class="menu">
         <button class="menubtn" type="button" aria-expanded="false" aria-haspopup="true">Deliverables</button>
         <ul class="menulist">
-          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
+          <li><a href="specification.html" data-page="specification.html">Specification</a></li>
+          <li><a href="platform.html" data-page="platform.html">Platform Selection</a></li>
           <li><a href="architecture.html" data-page="architecture.html">Architecture</a></li>
+          <li><a href="metaphor.html" data-page="metaphor.html">System Metaphor</a></li>
+          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
           <li><a href="timeline.html" data-page="timeline.html">Project Timeline</a></li>
           <li><a href="resources.html" data-page="resources.html">Related Links</a></li>
         </ul>
@@ -49,7 +51,7 @@
         <a href="#workflows">Workflows</a>
         <a href="#errors">Error Handling</a>
         <a href="#approach">Technical Approach</a>
-        <a href="#platform">Platform Selection</a>
+        <a href="platform.html">Platform Selection</a>
       </div>
     </div>
   </section>
@@ -429,29 +431,9 @@
   <section class="section" id="platform">
     <div class="col">
       <h2>Platform</h2>
-      <ul>
-        <li>
-          <strong>Programming languages.</strong> Python, JavaScript, HTML, SQL
-        </li>
-        <li>
-          <strong>Frontend.</strong> Built with React on top of JavaScript/HTML. 
-          React's component model allows us to reuse UI elements across both the chat interface and the separate librarian admin view, 
-          while maintaining a responsive web interface across desktop and mobile browsers.
-        </li>
-        <li>
-          <strong>Backend.</strong> A client-server system built on Postgres and Drizzle ORM. 
-          Client-server architecture is required to protect AI API keys and librarian credential checks. 
-          Postgres fits the client's tabular dataset structure, while Drizzle provides TypeScript-first, ensuring type safety between the database and application, rather than causing any issues at runtime.
-        </li>
-        <li>
-          <strong>Data visualization.</strong> None required for the user-end. 
-          We may implement light metric visualizations in the librarian admin panel to highlight unanswered questions and uncover dataset gaps. 
-          If time permits, this will be built using a React charting library like Recharts or Chart.js
-        </li>
-        <li>
-          <strong>Target environment.</strong> Modern desktop browsers such as Chrome, Safari, Firefox, Edge. As well as mobile web environments such as Safari on iOS and Chrome on Android.
-        </li>
-      </ul>
+      <p>Our platform choices, the alternatives we weighed against them, the pros and cons of
+      each, and the constraints our client placed on us are documented in full on the
+      <a href="platform.html">Platform Selection</a> page.</p>
     </div>
   </section>
 
@@ -460,7 +442,7 @@
 
 <footer class="sitefoot">
   <div class="sitefoot-inner">
-    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="deliverables.html">Deliverables Index</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a></div>
+    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="platform.html">Platform Selection</a><a href="architecture.html">Architecture</a><a href="metaphor.html">System Metaphor</a><a href="deliverables.html">Deliverables Index</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a></div>
     <p>Library Navigator. COMP 523 Software Engineering Laboratory, Department of
     Computer Science, UNC-Chapel Hill, Fall 2026.</p>
     <p class="updated small"></p>

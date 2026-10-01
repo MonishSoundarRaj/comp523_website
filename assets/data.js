@@ -103,6 +103,7 @@ var DELIVERABLES = [
   { name: "Literature review: AI chatbots in library reference", due: "2026-10-02", status: "wip",  where: "In progress" },
   { name: "API cost estimate for the client",                     due: "2026-10-02", status: "wip",  where: "In progress" },
   { name: "Dataset received and reviewed",                        due: "2026-10-02", status: "wip",  where: "Awaiting client" },
+  { name: "Platform selection evaluation",                        due: "2026-10-01", status: "done", where: "Platform Selection" },
   { name: "Architecture diagram",                                 due: "2026-10-01", status: "done", where: "Architecture" },
   { name: "XP-style system metaphor",                             due: "2026-10-01", status: "done", where: "Architecture" },
   { name: "Architecture and design document",                     due: "",           status: "todo", where: "Not started" },
@@ -114,6 +115,12 @@ var DELIVERABLES = [
 /* --------------------------------------------------------------- timeline */
 
 var TIMELINE = [
+  {
+    date: "2026-10-01",
+    kind: "Deliverable",
+    title: "Platform selection evaluation published",
+    body: "Every alternative we weighed for languages, front end, back end, database, data access, the AI layer, charting, hosting, and target environment, each with pros and cons and references, plus the four constraints our client placed on us. Two decisions are recorded as still open: the model provider and the hosting provider, both of which depend on conversations with the client."
+  },
   {
     date: "2026-10-01",
     kind: "Deliverable",
