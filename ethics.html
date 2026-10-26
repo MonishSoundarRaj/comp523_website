@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ethics Writeups | F26 COMP 523</title>
+<meta name="description" content="Ethical analysis of the Navier-Stokes priority controversy, the Volkswagen emissions scandal, and Therac-25.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="masthead">
+    <a class="brand" href="index.html">F26 &middot; COMP 523</a>
+    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" data-page="index.html">The Project</a>
+      <a href="team.html" data-page="team.html">Meet the Team</a>
+      <a href="meetings.html" data-page="meetings.html">Meetings and Decisions</a>
+      <div class="menu">
+        <button class="menubtn" type="button" aria-expanded="false" aria-haspopup="true">Deliverables</button>
+        <ul class="menulist">
+          <li><a href="specification.html" data-page="specification.html">Specification</a></li>
+          <li><a href="platform.html" data-page="platform.html">Platform Selection</a></li>
+          <li><a href="architecture.html" data-page="architecture.html">Architecture</a></li>
+          <li><a href="metaphor.html" data-page="metaphor.html">System Metaphor</a></li>
+          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Project Timeline</a></li>
+          <li><a href="resources.html" data-page="resources.html">Related Links</a></li>
+          <li><a href="ethics.html" data-page="ethics.html">Ethics Writeups</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="pagehead">
+    <h1 class="pagetitle">Ethics Writeups</h1>
+    <p class="deck">Three case studies on professional responsibility, software behavior, and the consequences of design decisions.</p>
+  </div>
+
+  <section class="section">
+    <div class="col">
+      <h2>Navier-Stokes priority controversy</h2>
+      <p>Two mathematicians alleged that their unpublished progress on a famous fluid-dynamics problem, developed partly with OpenAI’s Codex, was leaked or absorbed into OpenAI’s own AI-generated solution announced soon after. OpenAI denies this, though it acknowledged that de-identified user data might have improved its models, so the facts remain contested.</p>
+      <p>If the allegations hold, the problem is both behavior and function: people at the company allegedly tried to cut one researcher out of authorship and made remarks Buckmaster took as a threat, while AI tools that learn from user inputs blur the line between serving customers and competing with them. Even without direct misuse, the lack of transparency about how user data feeds model development is ethically troubling.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="col">
+      <h2>Volkswagen emissions scandal</h2>
+      <p>Volkswagen’s engines contained “defeat device” software that detected emissions testing and turned on pollution controls only during the test, so real-world driving produced far more nitrogen oxides than legally allowed. The software worked exactly as designed, so the wrongdoing lies in its deceptive purpose: misleading regulators and consumers, and harming public health, to save costs.</p>
+      <p>The problem is overwhelmingly the behavior of the engineers and managers who knowingly built, approved, or concealed it. “Following orders” is not an adequate defense for professionals who understand what they are building.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="col">
+      <h2>Therac-25</h2>
+      <p>This radiation therapy machine delivered massive overdoses to patients in the mid-1980s because of software race conditions and the removal of hardware safety interlocks. The function itself, treating cancer, was legitimate, so the fault lies in the engineers’ and manufacturer’s conduct.</p>
+      <p>They reused untested code, relied solely on software for safety, wrote cryptic error messages, and dismissed early injury reports instead of investigating them. The ethical failure is negligence: when software can kill, professionals have a duty to verify rigorously and respond honestly to incidents.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="platform.html">Platform Selection</a><a href="architecture.html">Architecture</a><a href="metaphor.html">System Metaphor</a><a href="deliverables.html">Deliverables Index</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a><a href="ethics.html">Ethics Writeups</a></div>
+    <p>Library Navigator. COMP 523 Software Engineering Laboratory, Department of
+    Computer Science, UNC-Chapel Hill, Fall 2026.</p>
+    <p class="updated small"></p>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
