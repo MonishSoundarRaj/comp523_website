@@ -9,7 +9,7 @@
    order, so add new entries anywhere in the array.
    ========================================================================== */
 
-var LAST_UPDATED = "2026-10-01";
+var LAST_UPDATED = "2026-11-06";
 
 /* --------------------------------------------------------------- the team
    Fill in full names and @unc.edu addresses. The one-click "email the whole
@@ -106,6 +106,7 @@ var DELIVERABLES = [
   { name: "Platform selection evaluation",                        due: "2026-10-01", status: "done", where: "Platform Selection" },
   { name: "Architecture diagram",                                 due: "2026-10-01", status: "done", where: "Architecture" },
   { name: "XP-style system metaphor",                             due: "2026-10-01", status: "done", where: "Architecture" },
+  { name: "Documentation plan published",                        due: "2026-11-06", status: "done", where: "Documentation Plan" },
   { name: "Architecture and design document",                     due: "",           status: "todo", where: "Not started" },
   { name: "First working version (proof of concept)",             due: "",           status: "todo", where: "Estimated 2 to 5 weeks from kickoff" },
   { name: "Client acceptance testing",                            due: "",           status: "todo", where: "Not started" },

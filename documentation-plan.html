@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentation Plan | F26 COMP 523</title>
+<meta name="description" content="Documentation plan for the Library Navigator project, covering user guidance and administrator setup.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="masthead">
+    <a class="brand" href="index.html">F26 &middot; COMP 523</a>
+    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" data-page="index.html">The Project</a>
+      <a href="team.html" data-page="team.html">Meet the Team</a>
+      <a href="meetings.html" data-page="meetings.html">Meetings and Decisions</a>
+      <div class="menu">
+        <button class="menubtn" type="button" aria-expanded="false" aria-haspopup="true">Deliverables</button>
+        <ul class="menulist">
+          <li><a href="specification.html" data-page="specification.html">Specification</a></li>
+          <li><a href="platform.html" data-page="platform.html">Platform Selection</a></li>
+          <li><a href="architecture.html" data-page="architecture.html">Architecture</a></li>
+          <li><a href="metaphor.html" data-page="metaphor.html">System Metaphor</a></li>
+          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
+          <li><a href="documentation-plan.html" data-page="documentation-plan.html">Documentation Plan</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Project Timeline</a></li>
+          <li><a href="resources.html" data-page="resources.html">Related Links</a></li>
+          <li><a href="ethics.html" data-page="ethics.html">Ethics Writeups</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="pagehead">
+    <h1 class="pagetitle">Documentation Plan</h1>
+    <p class="deck">A draft structure for the Library Navigator user guide and administrator guide, organized around the prototype’s intended readers and responsibilities.</p>
+  </div>
+
+  <section class="section">
+    <div class="col">
+      <h2>Library Navigator</h2>
+      <p class="lede">Library Navigator is a student prototype that helps people find resources offered by North Carolina public libraries. It has a public-facing reference desk and a separate staff page for managing library data. The answers and resource listings may be incomplete, so users should confirm important details with their library.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="col">
+      <h2>Part 1: User documentation</h2>
+
+      <h3>Intended readers</h3>
+      <ul>
+        <li><strong>Patron or student:</strong> Basic web browsing skills; may be unfamiliar with library websites and online databases. The documentation should use plain language, short steps, and clear explanations of library terms.</li>
+        <li><strong>Teacher or facilitator:</strong> Comfortable with a browser and guiding a student; not expected to manage administrator settings. The documentation should provide a brief introduction for read-aloud use, simple classroom activity ideas, and guidance for interpreting answers.</li>
+        <li><strong>Library staff member using the public desk:</strong> Comfortable with ordinary websites; may understand library services but not this specific prototype. The guide should explain how to use the desk and how to verify resource availability without assuming they manage the data.</li>
+      </ul>
+
+      <h3>Quick start</h3>
+      <ol>
+        <li>Enter a North Carolina ZIP code or town and choose <strong>Find my library</strong>.</li>
+        <li>Ask a question in your own words, such as “Where can I find free audiobooks?”</li>
+        <li>Review the answer and linked resources. Use <strong>Walk me through it</strong> when available.</li>
+        <li>Check <strong>On the shelf</strong> for other listed resources, or contact the library to confirm details.</li>
+      </ol>
+
+      <h3>Planned sections</h3>
+      <ol>
+        <li><strong>What Library Navigator does</strong>
+          <ul>
+            <li>Finds library resources based on a ZIP code or town.</li>
+            <li>Answers questions using the resources listed for that library.</li>
+            <li>Shows nearby branches, library contact details, and available resources or events.</li>
+          </ul>
+        </li>
+        <li><strong>For patrons and students</strong>
+          <ul>
+            <li>Finding a library by ZIP code or town.</li>
+            <li>Asking a useful question and reviewing the answer and sources.</li>
+            <li>Opening a resource or requesting step-by-step help.</li>
+            <li>Changing the selected location.</li>
+            <li>What to do when a ZIP code, town, answer, or link is unavailable.</li>
+          </ul>
+        </li>
+        <li><strong>For teachers and facilitators</strong>
+          <ul>
+            <li>Short introduction that can be read aloud:</li>
+          </ul>
+          <blockquote>“Library Navigator can help us explore resources our local library may offer. Enter a ZIP code or town, then ask a question. Look at the sources it gives you, and check with the library if you need to be sure a resource is available.”</blockquote>
+          <ul>
+            <li>Suggested classroom activity: choose a local ZIP code, ask about a learning or community need, and compare the answer with the linked library resource.</li>
+            <li>Remind students not to include names, home addresses, or other personal information in questions.</li>
+            <li>Explain that the prototype is for finding information and does not provide medical, legal, or financial advice.</li>
+          </ul>
+        </li>
+        <li><strong>Limits and troubleshooting</strong>
+          <ul>
+            <li>Resource information may be incomplete or out of date; confirm with the library.</li>
+            <li>If the site cannot find a location, try a ZIP code or a nearby town.</li>
+            <li>If an answer is uncertain or the service is unavailable, check the resource list and contact the library.</li>
+            <li>If a link does not work, use the library’s contact information to ask for help.</li>
+          </ul>
+        </li>
+        <li><strong>Optional detail</strong>
+          <ul>
+            <li>Brief explanations of access labels, statewide resources, staff-checked resources, and what happens when a resource requires a library card or sign-in.</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="col">
+      <h2>Part 2: Administrator documentation</h2>
+
+      <h3>Intended reader</h3>
+      <p>The administrator is an adult responsible for installing, configuring, and operating the prototype. The guide assumes they can use a terminal, install software, edit environment settings, and follow database instructions. It does not assume they are a software engineer. A separate technical document should cover code architecture and future development.</p>
+
+      <h3>Planned sections</h3>
+      <ol>
+        <li><strong>System requirements and dependencies</strong>
+          <ul>
+            <li>Node.js 20.19 or newer.</li>
+            <li>Python 3.11 or newer and <code>uv</code>.</li>
+            <li>A Supabase project containing the expected <code>library_data</code> table.</li>
+            <li>An Anthropic API key for the Claude-backed question service.</li>
+            <li>A modern browser for the public site and admin page.</li>
+            <li>Record which operating systems and browser versions have actually been tested; the current project notes list dependencies but do not establish a tested compatibility matrix.</li>
+          </ul>
+        </li>
+        <li><strong>Deployment configuration</strong>
+          <ul>
+            <li>Obtain the project files and install the listed dependencies.</li>
+            <li>Create the root <code>.env</code> file from the supplied example.</li>
+            <li>Set <code>DATABASE_URL</code>, <code>ANTHROPIC_API_KEY</code>, <code>AI_SERVICE_TOKEN</code>, and required administrator settings.</li>
+            <li>Configure <code>ADMIN_USERNAME</code>, <code>ADMIN_PASSWORD</code>, and an <code>ADMIN_SESSION_SECRET</code> of at least 32 characters. Leaving <code>ADMIN_PASSWORD</code> empty disables the admin page.</li>
+            <li>Keep credentials private and out of source control.</li>
+            <li>Run the database connection check before starting the application.</li>
+          </ul>
+        </li>
+        <li><strong>Start, stop, and redeploy</strong>
+          <ul>
+            <li>Start the local development services using the documented project command.</li>
+            <li>For a deployment or restart, document the hosting environment’s process manager, required environment variables, build and start commands, health checks, and recovery steps.</li>
+            <li>Confirm the public desk and <code>/admin</code> page behave as expected after startup.</li>
+            <li>Document how to refresh the deployment after an update or configuration change.</li>
+          </ul>
+        </li>
+        <li><strong>Accounts and access</strong>
+          <ul>
+            <li>Explain how administrator credentials are configured and distributed securely.</li>
+            <li>Describe how to change the session secret; changing it signs out current admin sessions.</li>
+            <li>Explain that the teacher is a user of the public desk and is not automatically the system administrator.</li>
+          </ul>
+        </li>
+        <li><strong>Library data operations</strong>
+          <ul>
+            <li>Sign in at <code>/admin</code> to search, add, edit, or remove rows in <code>library_data</code>.</li>
+            <li>Explain the meaning and expected format of the data fields, with examples and a data-entry checklist.</li>
+            <li>Review changes before saving; confirm resource names, URLs, library or branch, and geographic scope.</li>
+            <li>Note that changes appear to patrons after the application refreshes its library data, typically within five minutes.</li>
+            <li>Clarify that the admin page manages rows; it does not create or alter database tables.</li>
+          </ul>
+        </li>
+        <li><strong>Troubleshooting and recovery</strong>
+          <ul>
+            <li>Use the database check command to diagnose connection or table issues.</li>
+            <li>Include steps for missing or invalid credentials, unavailable database or AI service, failed startup, and restoring or refreshing the data.</li>
+            <li>Document who to contact for hosting, database, or API account issues.</li>
+          </ul>
+        </li>
+        <li><strong>Compatibility and known limitations</strong>
+          <ul>
+            <li>Maintain a tested environment list and note known incompatibilities as they are discovered.</li>
+            <li>State that the library dataset may be incomplete and should be reviewed.</li>
+            <li>Include the consequences of disabling the admin page and of rotating administrator credentials or the session secret.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>Before publication</h3>
+      <p>This is a plan rather than finished manuals. Before publication, the project should fill in the tested operating systems and browsers, the production hosting and recovery procedure, and the field-by-field data-entry guidance for the actual deployment.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="platform.html">Platform Selection</a><a href="architecture.html">Architecture</a><a href="metaphor.html">System Metaphor</a><a href="deliverables.html">Deliverables Index</a><a href="documentation-plan.html">Documentation Plan</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a><a href="ethics.html">Ethics Writeups</a></div>
+    <p>Library Navigator. COMP 523 Software Engineering Laboratory, Department of
+    Computer Science, UNC-Chapel Hill, Fall 2026.</p>
+    <p class="updated small"></p>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
