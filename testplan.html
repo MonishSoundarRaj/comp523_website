@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test Plan | F26 COMP 523</title>
+<meta name="description" content="Test plan for Library Navigator: what we would test with unlimited time, and what we will test, by whom, and when.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="masthead">
+    <a class="brand" href="index.html">F26 &middot; COMP 523</a>
+    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" data-page="index.html">The Project</a>
+      <a href="team.html" data-page="team.html">Meet the Team</a>
+      <a href="meetings.html" data-page="meetings.html">Meetings and Decisions</a>
+      <div class="menu">
+        <button class="menubtn" type="button" aria-expanded="false" aria-haspopup="true">Deliverables</button>
+        <ul class="menulist">
+          <li><a href="specification.html" data-page="specification.html">Specification</a></li>
+          <li><a href="platform.html" data-page="platform.html">Platform Selection</a></li>
+          <li><a href="architecture.html" data-page="architecture.html">Architecture</a></li>
+          <li><a href="metaphor.html" data-page="metaphor.html">System Metaphor</a></li>
+          <li><a href="testplan.html" data-page="testplan.html">Test Plan</a></li>
+          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Project Timeline</a></li>
+          <li><a href="resources.html" data-page="resources.html">Related Links</a></li>
+          <li><a href="ethics.html" data-page="ethics.html">Ethics Writeups</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="pagehead">
+    <h1 class="pagetitle">Test Plan</h1>
+    <p class="deck">Part 1 is what we would test with all the time we needed. Part 2 is what we will
+    actually test: who, when, where, and what result we expect. Usability testing is left out, as allowed.</p>
+  </div>
+
+  <section class="section">
+    <div class="col-wide">
+      <div class="jump">
+        <a href="#ideal">Part 1: The full plan</a>
+        <a href="#actual">Part 2: What we will test</a>
+        <a href="#run">How to run the tests</a>
+        <a href="#schedule">Who and when</a>
+      </div>
+
+      <h2>What is being tested</h2>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Part</th><th>What it is</th><th>Test tool</th></tr></thead>
+        <tbody>
+          <tr><td>Website</td><td>React app: the patron page and the admin page</td><td>Vitest + React Testing Library</td></tr>
+          <tr><td>Server</td><td>Node.js/Express app that reads and edits <code>library_data</code></td><td>Vitest</td></tr>
+          <tr><td>AI service</td><td>Python/FastAPI app that asks Claude and checks its sources</td><td>pytest</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Tools</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Tool</th><th>What it does for us</th></tr></thead>
+        <tbody>
+          <tr><td>Vitest</td><td>Runs the JavaScript unit tests from the command line, like JUnit for Java.</td></tr>
+          <tr><td>React Testing Library</td><td>Draws one screen piece in a fake browser (jsdom) and checks what a user would see.</td></tr>
+          <tr><td>Supertest</td><td>Sends real HTTP requests to the server inside a test, without starting it by hand.</td></tr>
+          <tr><td>pytest</td><td>Runs the Python unit tests for the AI service.</td></tr>
+          <tr><td>Chrome and Safari</td><td>Used by hand for the system tests. The developer tools time each request for P1 and P2.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ================================================================ PART 1 -->
+
+  <section class="section" id="ideal">
+    <div class="col-wide">
+      <h2>Part 1: If we had all the time we needed</h2>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Kind</th><th>What we would do</th></tr></thead>
+        <tbody>
+          <tr><td>Unit</td><td>Automated tests for every function and every screen, with 90% code coverage.</td></tr>
+          <tr><td>Regression</td><td>Run every test automatically on every pull request, and block the merge if any test fails.</td></tr>
+          <tr><td>Integration</td><td>Test every API route against a real copy of the database and the AI service.</td></tr>
+          <tr><td>System (UI)</td><td>Automated browser tests of every page on Chrome, Safari, Firefox, Edge, iPhone, and Android.</td></tr>
+          <tr><td>Answer quality</td><td>200 real patron questions, with every answer graded by librarians.</td></tr>
+          <tr><td>Data</td><td>Check that every ZIP in the dataset finds a library and every resource link works.</td></tr>
+          <tr><td>Performance</td><td>Load test with 500 patrons at once, and on slow rural connections.</td></tr>
+          <tr><td>Security</td><td>An outside security review of the admin login and the API.</td></tr>
+          <tr><td>Acceptance</td><td>Several sessions with the client and with librarians from rural libraries.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ================================================================ PART 2 -->
+
+  <section class="section" id="actual">
+    <div class="col-wide">
+      <h2>Part 2: What we will actually test</h2>
+
+      <h3>Who tests</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Who</th><th>Plays which user</th><th>Tests</th></tr></thead>
+        <tbody>
+          <tr><td>Kevin Peng (Tech Lead)</td><td>Developer</td><td>Server unit tests, regression on every pull request</td></tr>
+          <tr><td>Monish Soundarraj (Client Manager)</td><td>Developer, librarian admin</td><td>AI service and admin tests</td></tr>
+          <tr><td>Will Minor (Web &amp; Docs Lead)</td><td>Developer, patron</td><td>Website unit tests, browser tests</td></tr>
+          <tr><td>Aditya Veerathu (Project Manager)</td><td>Patron</td><td>Weekly system test pass, phone tests, sets up acceptance testing</td></tr>
+          <tr><td>Dr. Fei Yu (client)</td><td>Librarian admin, patron</td><td>Acceptance testing</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">The end users we test as: an older adult managing a chronic condition, a homeschooling parent,
+      a rural teenager, and a librarian who keeps the data correct.</p>
+
+      <h3>Test environments</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Layer</th><th>Versions</th></tr></thead>
+        <tbody>
+          <tr><td>Computer</td><td>macOS 27.0, Apple silicon</td></tr>
+          <tr><td>Runtimes</td><td>Node.js 22.20.0, Python 3.13.5</td></tr>
+          <tr><td>Test tools</td><td>Vitest 5.0.4, React Testing Library 16.3.3, jsdom 30.1.3, Supertest 7.3.1, pytest 9.1.1</td></tr>
+          <tr><td>Database</td><td>The client's Supabase PostgreSQL. Admin add and remove tests use a local PostgreSQL 17 copy, so the client's data is never changed.</td></tr>
+          <tr><td>AI model</td><td>Claude (<code>claude-opus-5-5</code>), plus one run with no API key</td></tr>
+          <tr><td>Browsers</td><td>Chrome 153.0.8010.53 and Safari 27.0 on macOS 27.0. Safari on an iPhone and Chrome on an Android phone; the tester writes down the phone model and its iOS or Android version with each result.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>1. Automated unit tests</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>What</th><th>Cases</th><th>Who, by when</th></tr></thead>
+        <tbody>
+          <tr><td>ZIP check</td><td>A valid NC ZIP passes; <code>2751</code> and <code>10001</code> get a clear message</td><td>Kevin, Nov 4</td></tr>
+          <tr><td>Crisis check</td><td>Crisis words are caught; everyday questions are not</td><td>Kevin, Nov 4</td></tr>
+          <tr><td>Library lookup</td><td>A ZIP or town finds the right library system and its resources</td><td>Kevin, Nov 11</td></tr>
+          <tr><td>Admin</td><td>A wrong password is refused; add and remove work; signed-out users are blocked</td><td>Monish, Nov 11</td></tr>
+          <tr><td>AI service</td><td>Answers cite only real resources; it falls back to keyword search when the model is down</td><td>Monish, Nov 11</td></tr>
+          <tr><td>Website</td><td>The search box, the crisis banner, and the admin sign-in form</td><td>Will, Nov 18</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>2. Integration tests</h3>
+      <p>These check that the parts work together. They are automated with Vitest and Supertest.</p>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Parts</th><th>Cases</th><th>Who, by when</th></tr></thead>
+        <tbody>
+          <tr><td>Server and database</td><td>Against a local PostgreSQL copy: an admin adds a row and the ZIP lookup shows it; removes it and it is gone</td><td>Monish, Nov 18</td></tr>
+          <tr><td>Server and AI service</td><td>With a stand-in AI service: a question returns an answer with sources; if the AI service is down, the patron gets the "having trouble" message instead of an error</td><td>Kevin, Nov 18</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>3. Regression testing</h3>
+      <ul>
+        <li>All tests run with one command, <code>npm test</code>, before every commit.</li>
+        <li>The reviewer runs it again on every pull request. If a test fails, the change is not merged.</li>
+        <li>Every bug fix comes with a new test, so the bug can't come back.</li>
+      </ul>
+
+      <h3>4. System tests (manual, in the browser)</h3>
+      <p class="small muted">Start the app with <code>npm run dev</code> and open <code>http://localhost:5173</code>.</p>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>ID</th><th>Input</th><th>Expected result</th></tr></thead>
+        <tbody>
+          <tr><td>S1</td><td>Click a ZIP from the home page examples</td><td>That library system, its branches, and its resources</td></tr>
+          <tr><td>S2</td><td><code>2751</code></td><td>"That doesn't look like a ZIP code. Please enter five numbers, like 27514."</td></tr>
+          <tr><td>S3</td><td><code>10001</code></td><td>"Library Navigator covers North Carolina libraries only…" with links to other states' tools</td></tr>
+          <tr><td>S4</td><td>After S1, ask "Free audiobooks for a long drive"</td><td>An answer naming only that library's resources, with sources and a confidence label</td></tr>
+          <tr><td>S5</td><td>Ask "I want to die"</td><td>The crisis message with Call 988, Text 988, and 911</td></tr>
+          <tr><td>S6</td><td>Turn off the AI service, then ask a question</td><td>"Sorry, I'm having trouble answering questions right now…" The rest of the page still works.</td></tr>
+          <tr><td>S7</td><td>Go to <code>/admin</code> and enter a wrong password</td><td>"That username and password don't match."</td></tr>
+          <tr><td>S8</td><td>As admin, add a test resource for an example ZIP, then remove it</td><td>Patrons see it appear right away, then disappear</td></tr>
+          <tr><td>S9</td><td>An example ZIP followed by <code>-1234</code> (ZIP+4)</td><td>The same result as S1</td></tr>
+          <tr><td>S10</td><td><code>28999</code> (looks like an NC ZIP, but is not in the data)</td><td>"We don't have that ZIP code in our list yet. Try a nearby ZIP code, or the name of your town."</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>5. Performance and reliability</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>ID</th><th>Test</th><th>Pass if</th></tr></thead>
+        <tbody>
+          <tr><td>P1</td><td>Look up 10 ZIP codes</td><td>Each one loads in under 1 second</td></tr>
+          <tr><td>P2</td><td>Ask 10 questions</td><td>Each answer arrives within 20 seconds</td></tr>
+          <tr><td>R1</td><td>Disconnect the database while the app is running</td><td>ZIP search still works from the last copy loaded</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>6. Acceptance testing</h3>
+      <p>Dr. Fei Yu will test the app on her own laptop and phone at the client meeting on Wednesday, December 2.
+      Aditya runs the session. The app is accepted if:</p>
+      <ol>
+        <li>A ZIP or town finds the correct library system.</li>
+        <li>Answers name only that library's resources, with sources.</li>
+        <li>When the assistant is unsure, it says so.</li>
+        <li>Crisis words always show 988 and 911.</li>
+        <li>She can add and remove a resource on the admin page.</li>
+        <li>It works on her phone.</li>
+      </ol>
+
+      <h3>What we are leaving out, and why</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Left out</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Automated browser tests</td><td>Time. The manual system tests cover the same steps.</td></tr>
+          <tr><td>Firefox, Edge, older phones</td><td>Two desktop browsers and two phones cover the client's users.</td></tr>
+          <tr><td>Load testing</td><td>This is a proof of concept, not a public launch.</td></tr>
+          <tr><td>A large graded question set</td><td>It needs librarian time we don't have this semester.</td></tr>
+          <tr><td>Security and accessibility reviews</td><td>These need outside experts.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ================================================================ RUN -->
+
+  <section class="section" id="run">
+    <div class="col-wide">
+      <h2>How to run the tests</h2>
+      <p>The code and its tests are in <a href="https://github.com/MonishSoundarRaj/light">github.com/MonishSoundarRaj/light</a>.
+      From its main folder:</p>
+<pre><code>npm install
+npm run setup     # installs Python packages, checks the database
+npm test          # runs all automated tests (Vitest, then pytest)
+npm run dev       # starts the app for the manual tests</code></pre>
+      <p class="small muted">The automated tests need no database or API key. The manual tests need a <code>.env</code>
+      file with the database address, the Claude API key, and the admin password. The repository's README lists every
+      setting, and we will give the values to graders on request.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================ SCHEDULE -->
+
+  <section class="section" id="schedule">
+    <div class="col-wide">
+      <h2>Who tests and when</h2>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>When</th><th>What</th><th>Who</th></tr></thead>
+        <tbody>
+          <tr><td>Every pull request</td><td>Regression: <code>npm test</code></td><td>Author and reviewer</td></tr>
+          <tr><td>Wed, Nov 4</td><td>First unit tests (ZIP and crisis checks)</td><td>Kevin</td></tr>
+          <tr><td>Wed, Nov 11</td><td>Library, admin, and AI service tests; first system test pass on Chrome</td><td>Kevin, Monish, Aditya</td></tr>
+          <tr><td>Wed, Nov 18</td><td>Website tests; system tests on Safari and phones; P1, P2, R1</td><td>Will, Aditya</td></tr>
+          <tr><td>Every Wednesday after</td><td>System tests S1–S10 before the client meeting</td><td>Rotating team member</td></tr>
+          <tr><td>Wed, Dec 2</td><td>Acceptance testing</td><td>Dr. Fei Yu, with the team</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="platform.html">Platform Selection</a><a href="architecture.html">Architecture</a><a href="metaphor.html">System Metaphor</a><a href="testplan.html">Test Plan</a><a href="deliverables.html">Deliverables Index</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a><a href="ethics.html">Ethics Writeups</a></div>
+    <p>Library Navigator. COMP 523 Software Engineering Laboratory, Department of
+    Computer Science, UNC-Chapel Hill, Fall 2026.</p>
+    <p class="updated small"></p>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

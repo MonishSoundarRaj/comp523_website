@@ -32,6 +32,7 @@ with all navigation in the site header.
 | `team.html` | Roster, roles, contact, team rules, client and faculty |
 | `meetings.html` | Schedule of regular meetings, journal of meetings and decisions |
 | `specification.html` | Requirements, personas, user stories, workflows, error handling |
+| `testplan.html` | Test plan: the full plan and what we will test |
 | `deliverables.html` | Every deliverable with due date and status |
 | `timeline.html` | Dated milestones, decisions, deployments, pivots |
 | `resources.html` | Related external links |
@@ -60,8 +61,7 @@ Timeline and journal entries sort themselves into reverse-chronological order, s
 you can add a new entry anywhere in the array.
 
 Two things live in the HTML rather than in the data file, because they rarely
-change: the header navigation and the brand text in the top left. Both are repeated
-in all seven pages, so changing either means editing all seven.
+change: the header navigation and the brand text in the top left. Both are repeated in every page, so changing either means editing every page.
 
 ## Viewing locally
 

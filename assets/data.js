@@ -107,6 +107,7 @@ var DELIVERABLES = [
   { name: "Architecture diagram",                                 due: "2026-10-01", status: "done", where: "Architecture" },
   { name: "XP-style system metaphor",                             due: "2026-10-01", status: "done", where: "Architecture" },
   { name: "Documentation plan published",                        due: "2026-11-06", status: "done", where: "Documentation Plan" },
+  { name: "Test plan",                                            due: "2026-10-28", status: "done", where: "Test Plan" },
   { name: "Architecture and design document",                     due: "",           status: "todo", where: "Not started" },
   { name: "First working version (proof of concept)",             due: "",           status: "todo", where: "Estimated 2 to 5 weeks from kickoff" },
   { name: "Client acceptance testing",                            due: "",           status: "todo", where: "Not started" },
@@ -116,6 +117,12 @@ var DELIVERABLES = [
 /* --------------------------------------------------------------- timeline */
 
 var TIMELINE = [
+  {
+    date: "2026-10-27",
+    kind: "Deliverable",
+    title: "Test plan published",
+    body: "Two parts: what we would test with unlimited time, and what we will test. The plan covers automated unit tests with Vitest and pytest, regression testing before every merge, manual system tests, and acceptance testing with the client on December 2."
+  },
   {
     date: "2026-10-01",
     kind: "Deliverable",
