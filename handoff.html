@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Related Links | F26 COMP 523</title>
+<meta name="description" content="External resources the team references while building Library Navigator.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="masthead">
+    <a class="brand" href="index.html">F26 &middot; COMP 523</a>
+    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" data-page="index.html">The Project</a>
+      <a href="team.html" data-page="team.html">Meet the Team</a>
+      <a href="meetings.html" data-page="meetings.html">Meetings and Decisions</a>
+      <div class="menu">
+        <button class="menubtn" type="button" aria-expanded="false" aria-haspopup="true">Deliverables</button>
+        <ul class="menulist">
+          <li><a href="specification.html" data-page="specification.html">Specification</a></li>
+          <li><a href="platform.html" data-page="platform.html">Platform Selection</a></li>
+          <li><a href="architecture.html" data-page="architecture.html">Architecture</a></li>
+          <li><a href="metaphor.html" data-page="metaphor.html">System Metaphor</a></li>
+          <li><a href="testplan.html" data-page="testplan.html">Test Plan</a></li>
+          <li><a href="deliverables.html" data-page="deliverables.html">Deliverables Index</a></li>
+          <li><a href="handoff.html" data-page="handoff.html">Project Handoff</a></li>
+          <li><a href="documentation-plan.html" data-page="documentation-plan.html">Documentation Plan</a></li>
+          <li><a href="timeline.html" data-page="timeline.html">Project Timeline</a></li>
+          <li><a href="resources.html" data-page="resources.html">Related Links</a></li>
+          <li><a href="ethics.html" data-page="ethics.html">Ethics Writeups</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="pagehead">
+    <h1 class="pagetitle">Project Handoff</h1>
+    <p class="deck">Application overview, setup requirements, ownership, hosting, and ongoing costs for the LIGHT website.</p>
+  </div>
+
+  <section class="section">
+    <div class="col">
+      <h2>Application overview</h2>
+      <p class="lede">LIGHT helps people find information about nearby local libraries through a conversational search experience.</p>
+      <p>Users provide a ZIP code. The application uses it to identify nearby libraries and search the corresponding database for relevant information. A Claude chatbot turns the database results into a clear response in standard English and includes a confidence score indicating how accurate the response is expected to be.</p>
+      <p>We will provide the client with links and ownership to all necessary tools.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="col">
+      <h2>What the application uses</h2>
+      <div class="record">
+        <div class="record-title">Supabase database</div>
+        <p class="record-body">Stores the library information used to answer searches. The team can help provide access to the existing database or set up another instance if desired.</p>
+      </div>
+      <div class="record">
+        <div class="record-title">Claude API</div>
+        <p class="record-body">Provides the chatbot functionality. To continue using Claude, create an account and replace the API key in the <code>.env</code> file. The team can help configure another chatbot, such as OpenAI or Ollama, if preferred.</p>
+      </div>
+      <div class="record">
+        <div class="record-title">Website hosting and source code</div>
+        <p class="record-body">The site is currently hosted through GitHub Pages from a repository held in a team member’s personal account. The team can transfer ownership or create a copy for the client. Hosting can remain on GitHub Pages, move to Carolina CloudApps, or use a personal hosting device. Carolina CloudApps may require client approval before the team can assist with setup.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="col">
+      <h2>Costs and scaling</h2>
+      <p>At the current scale, the Claude API is the only expected cost, and it is minimal. If usage grows, database and hosting charges may apply. Free hosting options such as GitHub Pages or Carolina CloudApps can avoid hosting charges.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="sitefoot">
+  <div class="sitefoot-inner">
+    <div class="sitefoot-nav"><a href="index.html">The Project</a><a href="team.html">Meet the Team</a><a href="meetings.html">Meetings and Decisions</a><a href="specification.html">Specification</a><a href="platform.html">Platform Selection</a><a href="architecture.html">Architecture</a><a href="metaphor.html">System Metaphor</a><a href="testplan.html">Test Plan</a><a href="deliverables.html">Deliverables Index</a><a href="handoff.html">Project Handoff</a><a href="documentation-plan.html">Documentation Plan</a><a href="timeline.html">Project Timeline</a><a href="resources.html">Related Links</a><a href="ethics.html">Ethics Writeups</a></div>
+    <p>Library Navigator. COMP 523 Software Engineering Laboratory, Department of
+    Computer Science, UNC-Chapel Hill, Fall 2026.</p>
+    <p class="updated small"></p>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
+
+
